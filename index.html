@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Can — Proje Dashboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card-hover: #222632;
+    --border: #2a2e3a;
+    --text: #e4e4e7;
+    --text-dim: #8b8d97;
+    --accent-green: #22c55e;
+    --accent-blue: #3b82f6;
+    --accent-orange: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-purple: #a855f7;
+    --accent-teal: #14b8a6;
+  }
+
+  body {
+    font-family: 'Montserrat', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .stat-pill .number,
+  .project-card .card-header h3,
+  .week-section h3,
+  .insight-card h3,
+  .badge {
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .header .subtitle {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  .quick-stats {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 20px;
+    text-align: center;
+    min-width: 120px;
+  }
+  .stat-pill .number {
+    font-size: 24px;
+    font-weight: 700;
+    display: block;
+  }
+  .stat-pill .label {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 24px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 4px;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dim);
+    transition: all 0.2s;
+    white-space: nowrap;
+    border: none;
+    background: none;
+  }
+  .tab:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+  .tab.active { color: #fff; background: var(--accent-blue); }
+
+  /* TAB CONTENT */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* PROJECT CARDS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+  .project-card:hover { border-color: rgba(255,255,255,0.15); }
+  .project-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .project-card .card-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .badge.urgent { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+  .badge.active { background: rgba(34,197,94,0.15); color: var(--accent-green); }
+  .badge.waiting { background: rgba(245,158,11,0.15); color: var(--accent-orange); }
+  .badge.paused { background: rgba(139,141,151,0.15); color: var(--text-dim); }
+
+  .progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px;
+    margin: 12px 0;
+    overflow: hidden;
+  }
+  .progress-bar .fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+
+  .card-detail {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .card-detail strong {
+    color: var(--text);
+  }
+
+  .next-action {
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(59,130,246,0.08);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-blue);
+    font-size: 13px;
+  }
+  .next-action .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent-blue);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .blocker {
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(239,68,68,0.08);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-red);
+    font-size: 13px;
+  }
+  .blocker .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent-red);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  /* WEEKLY PLAN TABLE */
+  .week-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .week-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .week-section h3 .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-dim);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 10px 12px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+  }
+  .status-done { background: var(--accent-green); }
+  .status-progress { background: var(--accent-blue); }
+  .status-pending { background: var(--text-dim); }
+  .status-waiting { background: var(--accent-orange); }
+
+  /* ACTION ITEMS */
+  .action-list {
+    list-style: none;
+  }
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    transition: border-color 0.2s;
+  }
+  .action-item:hover { border-color: rgba(255,255,255,0.15); }
+  .action-item .project-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .tag-farmbridge { background: rgba(34,197,94,0.15); color: var(--accent-green); }
+  .tag-tradebot { background: rgba(168,85,247,0.15); color: var(--accent-purple); }
+  .tag-bergama { background: rgba(59,130,246,0.15); color: var(--accent-blue); }
+  .tag-bridgegate { background: rgba(245,158,11,0.15); color: var(--accent-orange); }
+  .tag-studybird { background: rgba(20,184,166,0.15); color: var(--accent-teal); }
+
+  .action-item .deadline {
+    margin-left: auto;
+    color: var(--text-dim);
+    font-size: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .action-item .deadline.soon { color: var(--accent-orange); }
+  .action-item .deadline.overdue { color: var(--accent-red); }
+
+  /* INSIGHTS */
+  .insight-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .insight-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .insight-card p, .insight-card li {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .insight-card li { margin-left: 16px; }
+  .insight-card li strong { color: var(--text); }
+
+  /* TIMELINE */
+  .timeline-container {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .timeline-item {
+    display: flex;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-date {
+    font-size: 12px;
+    color: var(--text-dim);
+    width: 80px;
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+  .timeline-content {
+    font-size: 13px;
+  }
+  .timeline-content strong {
+    color: #fff;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 12px; font-size: 14px; }
+    .header { flex-direction: column; gap: 12px; }
+    .header h1 { font-size: 22px; }
+    .quick-stats { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .stat-pill { min-width: unset; padding: 10px 12px; }
+    .stat-pill .number { font-size: 20px; }
+    .stat-pill .label { font-size: 10px; }
+
+    .tabs { gap: 2px; padding: 3px; -webkit-overflow-scrolling: touch; }
+    .tab { padding: 8px 14px; font-size: 13px; }
+
+    .project-card { padding: 16px; }
+    .project-card .card-header h3 { font-size: 16px; }
+
+    .week-section { padding: 16px; overflow-x: auto; }
+    table { min-width: 500px; }
+
+    .action-item {
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px;
+    }
+    .action-item .deadline {
+      margin-left: 0;
+      width: 100%;
+      text-align: right;
+    }
+
+    .timeline-item { flex-direction: column; gap: 4px; }
+    .timeline-date { width: auto; font-weight: 600; }
+
+    .insight-card { padding: 16px; }
+  }
+
+  @media (max-width: 400px) {
+    body { padding: 8px; }
+    .header h1 { font-size: 20px; }
+    .quick-stats { grid-template-columns: 1fr 1fr; }
+    .tab { padding: 7px 10px; font-size: 12px; }
+    .card-detail { font-size: 12px; }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1>Can — Dashboard</h1>
+    <div class="subtitle">Son güncelleme: 04.04.2026 | Hafta: 30 Mart – 5 Nisan 2026</div>
+  </div>
+  <div class="quick-stats">
+    <div class="stat-pill">
+      <span class="number" style="color:var(--accent-green)">5</span>
+      <span class="label">Aktif Proje</span>
+    </div>
+    <div class="stat-pill">
+      <span class="number" style="color:var(--accent-orange)">12</span>
+      <span class="label">Açık Aksiyon</span>
+    </div>
+    <div class="stat-pill">
+      <span class="number" style="color:var(--accent-blue)">18</span>
+      <span class="label">Bu Hafta Tamamlanan</span>
+    </div>
+    <div class="stat-pill">
+      <span class="number" style="color:var(--accent-red)">FarmBridge</span>
+      <span class="label">En Acil</span>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="showTab('projects')">Projeler</button>
+  <button class="tab" onclick="showTab('weekly')">Haftalık Plan</button>
+  <button class="tab" onclick="showTab('actions')">Aksiyonlar</button>
+  <button class="tab" onclick="showTab('timeline')">Zaman Çizelgesi</button>
+  <button class="tab" onclick="showTab('insights')">Notlar & Fırsatlar</button>
+</div>
+
+<!-- TAB 1: PROJELER -->
+<div id="projects" class="tab-content active">
+  <div class="projects-grid">
+
+    <!-- FARMBRIDGE -->
+    <div class="project-card" style="border-top: 3px solid var(--accent-green);">
+      <div class="card-header">
+        <h3>FarmBridge</h3>
+        <span class="badge urgent">En Acil</span>
+      </div>
+      <div class="card-detail">KUICK Creation 2026 — Tarım tedarik zinciri şeffaflık platformu</div>
+      <div class="card-detail"><strong>Framework:</strong> Disciplined Entrepreneurship</div>
+      <div class="card-detail"><strong>Aşama:</strong> DE Steps 0-6 tamamlandı, DE 6-12 + PMR'a geçiliyor</div>
+      <div class="progress-bar">
+        <div class="fill" style="width:35%; background: linear-gradient(90deg, var(--accent-green), #4ade80);"></div>
+      </div>
+      <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~35% (DE 6/24 + Week1 Report)</div>
+
+      <div class="card-detail" style="margin-top:12px;"><strong>Bu hafta tamamlanan:</strong></div>
+      <div class="card-detail">&#10003; Week 1 Progress Report (13 sayfa PDF)</div>
+      <div class="card-detail">&#10003; Akhisar saha ziyareti programı hazır</div>
+      <div class="card-detail">&#10003; Mentor görüşmesi yapıldı (01.04)</div>
+      <div class="card-detail">&#10003; DE Step 6 (Life Cycle Use Case) taslağı</div>
+
+      <div class="next-action">
+        <div class="label">Sonraki Aksiyonlar</div>
+        Akhisar field trip (bu hafta) &#8594; Restoran PMR başlat &#8594; Qapera görüşmesi &#8594; Concierge test planı &#8594; DE 6-12
+      </div>
+    </div>
+
+    <!-- TRADEBOT -->
+    <div class="project-card" style="border-top: 3px solid var(--accent-purple);">
+      <div class="card-header">
+        <h3>TradeBot</h3>
+        <span class="badge active">Aktif</span>
+      </div>
+      <div class="card-detail">Polymarket copytrade botu — Python + Flask</div>
+      <div class="card-detail"><strong>Bankroll:</strong> $50 | <strong>Trader:</strong> 5 | <strong>Strateji:</strong> 4 fiyat aralığı</div>
+      <div class="card-detail"><strong>Aşama:</strong> Canlı test devam ediyor, bug fix'ler tamamlandı</div>
+      <div class="progress-bar">
+        <div class="fill" style="width:80%; background: linear-gradient(90deg, var(--accent-purple), #c084fc);"></div>
+      </div>
+      <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~80% (15.8/17 aşama)</div>
+
+      <div class="card-detail" style="margin-top:12px;"><strong>Bu hafta tamamlanan:</strong></div>
+      <div class="card-detail">&#10003; Sıfırdan canlı bota (1 haftada)</div>
+      <div class="card-detail">&#10003; Fiyat aralığı stratejileri (4 segment)</div>
+      <div class="card-detail">&#10003; Exit manager + otomatik çıkış</div>
+      <div class="card-detail">&#10003; Dashboard v2 (kapali pozisyonlar, trader performans)</div>
+      <div class="card-detail">&#10003; 7+ kritik bug fix (Gamma API, pagination, FOK geçişi, fiyat map)</div>
+
+      <div class="next-action">
+        <div class="label">Sonraki Aksiyonlar</div>
+        SELL balance sorunu arastir &#8594; Canlı test analizi &#8594; VPS'e taşıma (7/24)
+      </div>
+      <div class="blocker">
+        <div class="label">Dikkat</div>
+        SELL order'lar balance/allowance hatası veriyor — araştırılacak
+      </div>
+    </div>
+
+    <!-- BERGAMA FUTBOL -->
+    <div class="project-card" style="border-top: 3px solid var(--accent-blue);">
+      <div class="card-header">
+        <h3>Bergama Futbol</h3>
+        <span class="badge waiting">Bekleme</span>
+      </div>
+      <div class="card-detail">Bergama Belediyesi futbol altyapı projesi danışmanlığı</div>
+      <div class="card-detail"><strong>Kapsam:</strong> A Takım + Akademi (U13-U19) + Futbol Okulları (6-12 yaş)</div>
+      <div class="card-detail"><strong>Aşama:</strong> PPTX sunum tamamlandı, belediye geri bildirimi bekleniyor</div>
+      <div class="progress-bar">
+        <div class="fill" style="width:40%; background: linear-gradient(90deg, var(--accent-blue), #60a5fa);"></div>
+      </div>
+      <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~40%</div>
+
+      <div class="card-detail" style="margin-top:12px;"><strong>Tamamlanan çıktılar:</strong></div>
+      <div class="card-detail">&#10003; PPTX sunum (20 slayt — Altınordu modeli referans)</div>
+      <div class="card-detail">&#10003; Koordinatör görüşme dokümanı (DOCX)</div>
+      <div class="card-detail">&#10003; Organizasyon şeması</div>
+
+      <div class="next-action">
+        <div class="label">Sonraki Adım</div>
+        Koordinatör belediyeye sunacak &#8594; Geri bildirim geldiğinde detaylı proje dosyası + bütçe tablosu
+      </div>
+    </div>
+
+    <!-- BRIDGEGATE -->
+    <div class="project-card" style="border-top: 3px solid var(--accent-orange);">
+      <div class="card-header">
+        <h3>BridgeGate</h3>
+        <span class="badge waiting">Bekleme</span>
+      </div>
+      <div class="card-detail">Video editing — Finans/yatırım temalı kısa format videolar</div>
+      <div class="card-detail"><strong>Müşteri:</strong> BridgeGate (İngiltere, gayrimenkul yatırım)</div>
+      <div class="card-detail"><strong>Aktif video:</strong> ETF vs. Hisse (43sn, Draft 2 tamamlandı)</div>
+      <div class="progress-bar">
+        <div class="fill" style="width:60%; background: linear-gradient(90deg, var(--accent-orange), #fbbf24);"></div>
+      </div>
+      <div class="card-detail" style="text-align:right; font-size:12px;">ETF Video İlerleme: ~60% (Draft 2/4)</div>
+
+      <div class="card-detail" style="margin-top:12px;"><strong>Draft 2 stili:</strong></div>
+      <div class="card-detail">Typewriter animasyon + bold sans-serif + finans app estetiği</div>
+
+      <div class="next-action">
+        <div class="label">Sonraki Adım</div>
+        Müşteriden Draft 2 geri bildirimi bekleniyor &#8594; Draft 3 (tasarim finalize)
+      </div>
+    </div>
+
+    <!-- STUDYBIRD -->
+    <div class="project-card" style="border-top: 3px solid var(--accent-teal);">
+      <div class="card-header">
+        <h3>StudyBird</h3>
+        <span class="badge paused">Düşük Öncelik</span>
+      </div>
+      <div class="card-detail">Flappy Bird tarzı quiz oyunu — öğrenme projesi</div>
+      <div class="card-detail"><strong>Motor:</strong> Godot Engine 4.x (React Native'den geçiş)</div>
+      <div class="card-detail"><strong>Aşama:</strong> Godot kurulumu + Game Studios entegrasyonu bekliyor</div>
+      <div class="progress-bar">
+        <div class="fill" style="width:10%; background: linear-gradient(90deg, var(--accent-teal), #5eead4);"></div>
+      </div>
+      <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~10%</div>
+
+      <div class="next-action">
+        <div class="label">Sonraki Adım</div>
+        Godot 4.x kurulumu &#8594; Claude Code Game Studios entegrasyonu &#8594; Temel mekanik prototipi
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TAB 2: HAFTALIK PLAN -->
+<div id="weekly" class="tab-content">
+
+  <!-- GECEN HAFTA -->
+  <div class="week-section">
+    <h3><span class="dot" style="background:var(--accent-green);"></span> Geçen Hafta: 30 Mart – 5 Nisan 2026</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Durum</th>
+          <th>Proje</th>
+          <th>Görev</th>
+          <th>Detay</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>Week 1 Progress Report</td>
+          <td>13 sayfa PDF, 3 canvas, DE 1-5, mentor notları</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>Mentor görüşmesi (01.04)</td>
+          <td>Hibrit model, concierge test, Qapera bağlantısı, restoran PMR önerisi</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>Akhisar saha ziyareti hazırlık</td>
+          <td>Program PDF, Okan Mordal ile plan</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="project-tag tag-bergama">Bergama</span></td>
+          <td>PPTX sunum (20 slayt)</td>
+          <td>A Takım + Akademi + Futbol Okulları + org chart</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="project-tag tag-bridgegate">BridgeGate</span></td>
+          <td>ETF vs. Hisse Draft 2</td>
+          <td>Typewriter animasyon, finans app estetiği, renk paleti</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="project-tag tag-tradebot">TradeBot</span></td>
+          <td>Sıfırdan canlı bota</td>
+          <td>15+ aşama: API, tracker, copier, strategy, exit mgr, dashboard, bug fix</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-progress"></span>Devam</td>
+          <td><span class="project-tag tag-tradebot">TradeBot</span></td>
+          <td>Canlı test ($50)</td>
+          <td>03.04'te başlatıldı, izleniyor</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Yapılmadı</td>
+          <td><span class="project-tag tag-studybird">StudyBird</span></td>
+          <td>Godot kurulumu</td>
+          <td>Zaman bulunamadı — sonraki haftaya</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BU HAFTA (placeholder) -->
+  <div class="week-section">
+    <h3><span class="dot" style="background:var(--accent-blue);"></span> Bu Hafta: 6 – 12 Nisan 2026 (planlanacak)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Durum</th>
+          <th>Proje</th>
+          <th>Görev</th>
+          <th>Deadline</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>Akhisar field trip + notları kaydet</td>
+          <td>Bu hafta içi</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>Restoran tarafı PMR görüşmeleri başlat</td>
+          <td>Bu hafta</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>Qapera kurucusuyla görüşme ayarla</td>
+          <td>Bu hafta</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>DE Steps 7-12'ye başla</td>
+          <td>Hafta sonu</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="project-tag tag-tradebot">TradeBot</span></td>
+          <td>SELL balance sorununu çöz</td>
+          <td>Hafta başı</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="project-tag tag-tradebot">TradeBot</span></td>
+          <td>Canlı test analizi + VPS araştırması</td>
+          <td>Hafta ortası</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-waiting"></span>Geri Bildirim</td>
+          <td><span class="project-tag tag-bergama">Bergama</span></td>
+          <td>Belediye geri bildirimi bekle</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-waiting"></span>Geri Bildirim</td>
+          <td><span class="project-tag tag-bridgegate">BridgeGate</span></td>
+          <td>Draft 2 geri bildirimi bekle</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TAB 3: AKSIYONLAR -->
+<div id="actions" class="tab-content">
+  <h3 style="margin-bottom:16px; font-size:16px;">Açık Aksiyon Maddeleri</h3>
+
+  <ul class="action-list">
+    <li class="action-item">
+      <span class="project-tag tag-farmbridge">FarmBridge</span>
+      <span>Akhisar field trip'i gerçekleştir, notları brief'e ekle</span>
+      <span class="deadline soon">Bu hafta</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-farmbridge">FarmBridge</span>
+      <span>Restoran tarafı PMR görüşmeleri başlat (en az 3 restoran)</span>
+      <span class="deadline soon">Bu hafta</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-farmbridge">FarmBridge</span>
+      <span>Qapera kurucusuyla görüşme ayarla + sorular hazır (brief'te mevcut)</span>
+      <span class="deadline soon">Bu hafta</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-farmbridge">FarmBridge</span>
+      <span>Concierge test planı oluştur</span>
+      <span class="deadline">Gelecek hafta</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-farmbridge">FarmBridge</span>
+      <span>Gelir modeli sweet spot analizi — "parayi kim verecek?"</span>
+      <span class="deadline">Gelecek mentor toplantısı</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-farmbridge">FarmBridge</span>
+      <span>Belirsiz konulari netleştir: kalite kontrol, lojistik modeli</span>
+      <span class="deadline">Gelecek mentor toplantısı</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-farmbridge">FarmBridge</span>
+      <span>DE Steps 7-12 (product specs, value prop, core & moats, DMU)</span>
+      <span class="deadline">Hafta 4-6 arası</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-tradebot">TradeBot</span>
+      <span>SELL balance/allowance hatasını arastir ve coz</span>
+      <span class="deadline soon">Hafta başı</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-tradebot">TradeBot</span>
+      <span>Canlı test sonuçlarını analiz et (P&L, hit rate)</span>
+      <span class="deadline">Hafta ortası</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-tradebot">TradeBot</span>
+      <span>VPS'e taşıma + 7/24 çalıştırma</span>
+      <span class="deadline">Bu ay</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-bergama">Bergama</span>
+      <span>Belediye geri bildirimi geldiğinde detaylı proje dosyası + bütçe tablosu</span>
+      <span class="deadline" style="color:var(--text-dim);">Beklemede</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-bridgegate">BridgeGate</span>
+      <span>Draft 2 geri bildirimi geldiğinde Draft 3 (tasarim finalize)</span>
+      <span class="deadline" style="color:var(--text-dim);">Beklemede</span>
+    </li>
+  </ul>
+</div>
+
+<!-- TAB 4: TIMELINE -->
+<div id="timeline" class="tab-content">
+  <div class="timeline-container">
+    <h3 style="margin-bottom:16px;">İlerleme Zaman Çizelgesi</h3>
+
+    <div class="timeline-item">
+      <div class="timeline-date">04.04</div>
+      <div class="timeline-content">
+        <strong>FarmBridge:</strong> Week 1 Report PDF final + Akhisar ziyaret programı hazır<br>
+        <strong>TradeBot:</strong> Dashboard v2, Gamma API fix, pagination, fiyat map fix, SELL revert, pozisyon limitleri, GTC→FOK geçişi
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">03.04</div>
+      <div class="timeline-content">
+        <strong>Bergama:</strong> PPTX sunum tamamlandı (20 slayt)<br>
+        <strong>TradeBot:</strong> Canlı test başlatıldı ($50), 6+ başarılı BUY, strategy.py + exit_manager.py + bakiye yönetimi
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">02.04</div>
+      <div class="timeline-content">
+        <strong>BridgeGate:</strong> ETF vs. Hisse Draft 2 tamamlandı (typewriter animasyon + finans estetiği)
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">01.04</div>
+      <div class="timeline-content">
+        <strong>FarmBridge:</strong> Ilk mentor görüşmesi — hibrit model, concierge test, Qapera bağlantısı<br>
+        <strong>TradeBot:</strong> API araştırma + tracker + copier + orders tamamlandı (Aşamalar 0-3)
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">30.03</div>
+      <div class="timeline-content">
+        <strong>Bergama:</strong> Brief oluşturuldu, proje Cowork'e eklendi<br>
+        <strong>Genel:</strong> Haftalık plan hazırlandı (30.03-05.04)
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">29.03</div>
+      <div class="timeline-content">
+        <strong>FarmBridge:</strong> Hafta 2 planlama, mentor + hoca görüşmesi soru listesi
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">27.03</div>
+      <div class="timeline-content">
+        <strong>FarmBridge:</strong> KUICK Creation kickoff toplantısı — genel olumlu geri bildirim
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">26.03</div>
+      <div class="timeline-content">
+        <strong>FarmBridge:</strong> Proje başlangıcı, mentor briefing dokümanı, Claude Cowork altyapısı, Canvas + DE Steps 0-6
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">23.03</div>
+      <div class="timeline-content">
+        <strong>BridgeGate:</strong> Video editing projesi basladi<br>
+        <strong>StudyBird:</strong> Oyun geliştirme projesi basladi
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 5: NOTLAR & FIRSATLAR -->
+<div id="insights" class="tab-content">
+
+  <div class="insight-card">
+    <h3>Bu Haftanın Önemli Çıkarımları</h3>
+    <ul>
+      <li><strong>TradeBot ivmesi:</strong> 1 haftada sıfırdan canlı bota geçiş — 15+ aşama, 7+ bug fix. Python + API entegrasyon becerileri hızla gelişiyor. Bu hiz ve sistematik yaklaşımı diğer projelere de taşımak lazim.</li>
+      <li><strong>FarmBridge mentor geri bildirimi kritik:</strong> "Parayi kim verecek?" sorusu projenin sacayağı. Restoran PMR bu soruyu cevaplamak için en önemli adim. Akhisar ziyareti + restoran PMR paralel gitmeli.</li>
+      <li><strong>Bergama + BridgeGate bekleme modunda:</strong> Iki proje de geri bildirim bekliyor. Bu süreci FarmBridge ve TradeBot'a odaklanmak için kullan.</li>
+      <li><strong>StudyBird ilerleme yok:</strong> 2 haftadir başlanamıyor. Öncelik sıralamasında en altta, makul — ama her hafta "yapılmadı" olarak kalması motivasyonu düşürür. Ya somut bir baslanma tarihi koy ya da bilinçli olarak "park edildi" yap.</li>
+    </ul>
+  </div>
+
+  <div class="insight-card">
+    <h3>Fırsatlar ve Öneriler</h3>
+    <ul>
+      <li><strong>Qapera görüşmesi yüksek değerli:</strong> Restoran tarafının acıları, SaaS fiyatlama deneyimi, KUICK/KWORKS iç bilgisi — tek görüşmede 3 farklı insight alabilirsin. Bunu önceliklendir.</li>
+      <li><strong>TradeBot → VPS geçişi:</strong> Bot stabilize olduğunda VPS'e tas. Hetzner veya Contabo ucuz Linux VPS, $4-5/ay. tmux veya systemd ile 7/24 çalıştırma. Bu adim botu "proje"den "urun"e çevirir.</li>
+      <li><strong>N8N entegrasyonu:</strong> TradeBot dashboard bildirimleri, FarmBridge PMR takibi, proje durum güncellemeleri — bunları N8N ile otomatikleştirmek mümkün. Özellikle Telegram bildirimlerini merkezi bir yere toplama.</li>
+      <li><strong>FarmBridge concierge test:</strong> MVP kodlamadan once manuel olarak 1-2 restoran + 1-2 çiftçi arasında "insan-powered marketplace" yap. WhatsApp grubu + Google Sheets yeterli. Bu hem PMR hem traction gösterir.</li>
+    </ul>
+  </div>
+
+  <div class="insight-card">
+    <h3>Haftalık Rutin Önerisi</h3>
+    <ul>
+      <li><strong>Sabah (09-12):</strong> FarmBridge (en acil, en taze kafa)</li>
+      <li><strong>Öğleden sonra (13-16):</strong> TradeBot veya beklemedeki projelerin geri bildirimi geldiyse onlar</li>
+      <li><strong>Akşam (17-20):</strong> Daha rahat iş — TradeBot izleme, StudyBird (başlanırsa), araştırma</li>
+      <li><strong>Pazar akşamı:</strong> Haftalık review + gelecek hafta planı (bu dashboard'u güncelle)</li>
+    </ul>
+  </div>
+
+  <div class="insight-card">
+    <h3>Riskler</h3>
+    <ul>
+      <li><strong>FarmBridge PMR gecikmesi:</strong> Restoran görüşmeleri bu hafta başlamazsa DE 7-12 veri desteksiz kalır. Bu hafta en az 2 restoran görüşmesi hedefle.</li>
+      <li><strong>TradeBot SELL sorunu:</strong> Balance/allowance hatası çözülmezse pozisyonlar kilitli kalır. Bu teknik borcu bu hafta kapat.</li>
+      <li><strong>Yoğunluk yönetimi:</strong> 5 aktif proje (2'si beklemede olsa da) + ana iş (market making). FarmBridge en acil, öncelik kaymasın.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+function showTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
