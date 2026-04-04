@@ -422,7 +422,7 @@
 <div class="header">
   <div>
     <h1>Can — Dashboard</h1>
-    <div class="subtitle">Son güncelleme: 04.04.2026 | Hafta: 30 Mart – 5 Nisan 2026</div>
+    <div class="subtitle">Son güncelleme: 05.04.2026 | Hafta: 6 – 12 Nisan 2026</div>
   </div>
   <div class="quick-stats">
     <div class="stat-pill">
@@ -483,34 +483,33 @@
       </div>
     </div>
 
-    <!-- TRADEBOT -->
+    <!-- COPYBOT v2 -->
     <div class="project-card" style="border-top: 3px solid var(--accent-purple);">
       <div class="card-header">
-        <h3>TradeBot</h3>
+        <h3>CopyBot v2</h3>
         <span class="badge active">Aktif</span>
       </div>
-      <div class="card-detail">Polymarket copytrade botu — Python + Flask</div>
-      <div class="card-detail"><strong>Bankroll:</strong> $50 | <strong>Trader:</strong> 5 | <strong>Strateji:</strong> 4 fiyat aralığı</div>
-      <div class="card-detail"><strong>Aşama:</strong> Canlı test devam ediyor, bug fix'ler tamamlandı</div>
+      <div class="card-detail">Polymarket copytrade botu — v1'den 18 bug dersiyle sıfırdan inşa</div>
+      <div class="card-detail"><strong>Stack:</strong> Python 3 + Flask (Blueprint) + WebSocket</div>
+      <div class="card-detail"><strong>Aşama:</strong> Planlama tamamlandı, Faz 0 (API araştırma) başlayacak</div>
       <div class="progress-bar">
-        <div class="fill" style="width:80%; background: linear-gradient(90deg, var(--accent-purple), #c084fc);"></div>
+        <div class="fill" style="width:5%; background: linear-gradient(90deg, var(--accent-purple), #c084fc);"></div>
       </div>
-      <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~80% (15.8/17 aşama)</div>
+      <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~5% (Planlama / 6 Faz)</div>
 
-      <div class="card-detail" style="margin-top:12px;"><strong>Bu hafta tamamlanan:</strong></div>
-      <div class="card-detail">&#10003; Sıfırdan canlı bota (1 haftada)</div>
-      <div class="card-detail">&#10003; Fiyat aralığı stratejileri (4 segment)</div>
-      <div class="card-detail">&#10003; Exit manager + otomatik çıkış</div>
-      <div class="card-detail">&#10003; Dashboard v2 (kapali pozisyonlar, trader performans)</div>
-      <div class="card-detail">&#10003; 7+ kritik bug fix (Gamma API, pagination, FOK geçişi, fiyat map)</div>
+      <div class="card-detail" style="margin-top:12px;"><strong>v1 retrospektifi (05.04):</strong></div>
+      <div class="card-detail">&#10003; 18 bug kataloglandı, kök neden analizi yapıldı</div>
+      <div class="card-detail">&#10003; Çalışma tarzı geri bildirimi kaydedildi</div>
+      <div class="card-detail">&#10003; v2 yol haritası oluşturuldu (6 faz)</div>
+      <div class="card-detail">&#10003; Proje yapısı ve mimari kararlar belirlendi</div>
 
       <div class="next-action">
-        <div class="label">Sonraki Aksiyonlar</div>
-        SELL balance sorunu arastir &#8594; Canlı test analizi &#8594; VPS'e taşıma (7/24)
+        <div class="label">6 Fazlı Yol Haritası</div>
+        Faz 0: API araştırma &#8594; Faz 1: Trader algoritması + backtesting &#8594; Faz 2: Günlük tarama &#8594; Faz 3: Pozisyon izleme &#8594; Faz 4: Order execution &#8594; Faz 5: Birleştirme + Master Panel
       </div>
-      <div class="blocker">
-        <div class="label">Dikkat</div>
-        SELL order'lar balance/allowance hatası veriyor — araştırılacak
+      <div class="next-action" style="margin-top:8px; border-left-color: var(--accent-purple);">
+        <div class="label" style="color: var(--accent-purple);">Sonraki Adım</div>
+        Faz 0: CLOB/Data/Gamma API rate limit testi + WebSocket bağlantı testi + orderbook yapısı analizi
       </div>
     </div>
 
@@ -633,15 +632,9 @@
         </tr>
         <tr>
           <td><span class="status-dot status-done"></span>Bitti</td>
-          <td><span class="project-tag tag-tradebot">TradeBot</span></td>
-          <td>Sıfırdan canlı bota</td>
-          <td>15+ aşama: API, tracker, copier, strategy, exit mgr, dashboard, bug fix</td>
-        </tr>
-        <tr>
-          <td><span class="status-dot status-progress"></span>Devam</td>
-          <td><span class="project-tag tag-tradebot">TradeBot</span></td>
-          <td>Canlı test ($50)</td>
-          <td>03.04'te başlatıldı, izleniyor</td>
+          <td><span class="project-tag tag-tradebot">CopyBot</span></td>
+          <td>v1 arşivlendi + v2 planlandı</td>
+          <td>18 bug kataloğu, lessons learned, 6 fazlı yol haritası, mimari kararlar</td>
         </tr>
         <tr>
           <td><span class="status-dot status-pending"></span>Yapılmadı</td>
@@ -692,15 +685,15 @@
         </tr>
         <tr>
           <td><span class="status-dot status-pending"></span>Bekliyor</td>
-          <td><span class="project-tag tag-tradebot">TradeBot</span></td>
-          <td>SELL balance sorununu çöz</td>
+          <td><span class="project-tag tag-tradebot">CopyBot v2</span></td>
+          <td>Faz 0: API araştırma (rate limit, WebSocket, orderbook)</td>
           <td>Hafta başı</td>
         </tr>
         <tr>
           <td><span class="status-dot status-pending"></span>Bekliyor</td>
-          <td><span class="project-tag tag-tradebot">TradeBot</span></td>
-          <td>Canlı test analizi + VPS araştırması</td>
-          <td>Hafta ortası</td>
+          <td><span class="project-tag tag-tradebot">CopyBot v2</span></td>
+          <td>Faz 1: Trader seçim algoritması tasarımına başla</td>
+          <td>Faz 0 sonrası</td>
         </tr>
         <tr>
           <td><span class="status-dot status-waiting"></span>Geri Bildirim</td>
@@ -760,19 +753,19 @@
       <span class="deadline">Hafta 4-6 arası</span>
     </li>
     <li class="action-item">
-      <span class="project-tag tag-tradebot">TradeBot</span>
-      <span>SELL balance/allowance hatasını arastir ve coz</span>
-      <span class="deadline soon">Hafta başı</span>
+      <span class="project-tag tag-tradebot">CopyBot v2</span>
+      <span>Faz 0: API constraint belirleme (CLOB, Data, Gamma rate limit + WebSocket + orderbook)</span>
+      <span class="deadline soon">Bu hafta</span>
     </li>
     <li class="action-item">
-      <span class="project-tag tag-tradebot">TradeBot</span>
-      <span>Canlı test sonuçlarını analiz et (P&L, hit rate)</span>
-      <span class="deadline">Hafta ortası</span>
+      <span class="project-tag tag-tradebot">CopyBot v2</span>
+      <span>Faz 1: Trader seçim algoritması + backtesting engine</span>
+      <span class="deadline">Faz 0 sonrası</span>
     </li>
     <li class="action-item">
-      <span class="project-tag tag-tradebot">TradeBot</span>
-      <span>VPS'e taşıma + 7/24 çalıştırma</span>
-      <span class="deadline">Bu ay</span>
+      <span class="project-tag tag-tradebot">CopyBot v2</span>
+      <span>3 Panel: Trader Bulma, Trader Takip, Pozisyon Yönetimi &#8594; Master Panel</span>
+      <span class="deadline">Faz 4-6</span>
     </li>
     <li class="action-item">
       <span class="project-tag tag-bergama">Bergama</span>
@@ -793,17 +786,23 @@
     <h3 style="margin-bottom:16px;">İlerleme Zaman Çizelgesi</h3>
 
     <div class="timeline-item">
+      <div class="timeline-date">05.04</div>
+      <div class="timeline-content">
+        <strong>CopyBot:</strong> v1 arşivlendi (18 bug kataloğu + lessons learned). v2 planlama tamamlandı: 6 faz, WebSocket-first mimari, 3 panel, orderbook fiyatlama, backtesting. Sıfırdan yeni klasör (CopyBot-v2/)
+      </div>
+    </div>
+    <div class="timeline-item">
       <div class="timeline-date">04.04</div>
       <div class="timeline-content">
         <strong>FarmBridge:</strong> Week 1 Report PDF final + Akhisar ziyaret programı hazır<br>
-        <strong>TradeBot:</strong> Dashboard v2, Gamma API fix, pagination, fiyat map fix, SELL revert, pozisyon limitleri, GTC→FOK geçişi
+        <strong>CopyBot v1:</strong> Dashboard v2, Gamma API fix, pagination, fiyat map fix, SELL revert, pozisyon limitleri, GTC→FOK geçişi
       </div>
     </div>
     <div class="timeline-item">
       <div class="timeline-date">03.04</div>
       <div class="timeline-content">
         <strong>Bergama:</strong> PPTX sunum tamamlandı (20 slayt)<br>
-        <strong>TradeBot:</strong> Canlı test başlatıldı ($50), 6+ başarılı BUY, strategy.py + exit_manager.py + bakiye yönetimi
+        <strong>CopyBot v1:</strong> Canlı test başlatıldı ($50), 6+ başarılı BUY, strategy.py + exit_manager.py + bakiye yönetimi
       </div>
     </div>
     <div class="timeline-item">
@@ -816,7 +815,7 @@
       <div class="timeline-date">01.04</div>
       <div class="timeline-content">
         <strong>FarmBridge:</strong> Ilk mentor görüşmesi — hibrit model, concierge test, Qapera bağlantısı<br>
-        <strong>TradeBot:</strong> API araştırma + tracker + copier + orders tamamlandı (Aşamalar 0-3)
+        <strong>CopyBot v1:</strong> API araştırma + tracker + copier + orders tamamlandı (Aşamalar 0-3)
       </div>
     </div>
     <div class="timeline-item">
@@ -860,9 +859,9 @@
   <div class="insight-card">
     <h3>Bu Haftanın Önemli Çıkarımları</h3>
     <ul>
-      <li><strong>TradeBot ivmesi:</strong> 1 haftada sıfırdan canlı bota geçiş — 15+ aşama, 7+ bug fix. Python + API entegrasyon becerileri hızla gelişiyor. Bu hiz ve sistematik yaklaşımı diğer projelere de taşımak lazim.</li>
+      <li><strong>CopyBot v1 → v2 geçişi:</strong> v1 5 günde 18 bug ve $20 kayıp üretti. Hız öncelikli yaklaşım sonuçta daha yavaş oldu (bug fix > geliştirme). v2'de test-then-advance prensibi: her modül kanıtlanmadan sonraki adıma geçilmeyecek. Aynı hatalar değil, yeni hatalar yapmak hedef.</li>
       <li><strong>FarmBridge mentor geri bildirimi kritik:</strong> "Parayi kim verecek?" sorusu projenin sacayağı. Restoran PMR bu soruyu cevaplamak için en önemli adim. Akhisar ziyareti + restoran PMR paralel gitmeli.</li>
-      <li><strong>Bergama + BridgeGate bekleme modunda:</strong> Iki proje de geri bildirim bekliyor. Bu süreci FarmBridge ve TradeBot'a odaklanmak için kullan.</li>
+      <li><strong>Bergama + BridgeGate bekleme modunda:</strong> Iki proje de geri bildirim bekliyor. Bu süreci FarmBridge ve CopyBot v2'ye odaklanmak için kullan.</li>
       <li><strong>StudyBird ilerleme yok:</strong> 2 haftadir başlanamıyor. Öncelik sıralamasında en altta, makul — ama her hafta "yapılmadı" olarak kalması motivasyonu düşürür. Ya somut bir baslanma tarihi koy ya da bilinçli olarak "park edildi" yap.</li>
     </ul>
   </div>
@@ -871,8 +870,8 @@
     <h3>Fırsatlar ve Öneriler</h3>
     <ul>
       <li><strong>Qapera görüşmesi yüksek değerli:</strong> Restoran tarafının acıları, SaaS fiyatlama deneyimi, KUICK/KWORKS iç bilgisi — tek görüşmede 3 farklı insight alabilirsin. Bunu önceliklendir.</li>
-      <li><strong>TradeBot → VPS geçişi:</strong> Bot stabilize olduğunda VPS'e tas. Hetzner veya Contabo ucuz Linux VPS, $4-5/ay. tmux veya systemd ile 7/24 çalıştırma. Bu adim botu "proje"den "urun"e çevirir.</li>
-      <li><strong>N8N entegrasyonu:</strong> TradeBot dashboard bildirimleri, FarmBridge PMR takibi, proje durum güncellemeleri — bunları N8N ile otomatikleştirmek mümkün. Özellikle Telegram bildirimlerini merkezi bir yere toplama.</li>
+      <li><strong>CopyBot v2 WebSocket-first:</strong> v2 baştan WebSocket ile tasarlanacak. Bu trailing stop, hızlı çıkış ve gerçek zamanlı fiyat için kritik. Polymarket CLOB API WebSocket desteği var — Faz 0'da test edilecek.</li>
+      <li><strong>N8N entegrasyonu:</strong> CopyBot v2 panel bildirimleri, FarmBridge PMR takibi, proje durum güncellemeleri — bunları N8N ile otomatikleştirmek mümkün. Özellikle Telegram bildirimlerini merkezi bir yere toplama.</li>
       <li><strong>FarmBridge concierge test:</strong> MVP kodlamadan once manuel olarak 1-2 restoran + 1-2 çiftçi arasında "insan-powered marketplace" yap. WhatsApp grubu + Google Sheets yeterli. Bu hem PMR hem traction gösterir.</li>
     </ul>
   </div>
@@ -881,8 +880,8 @@
     <h3>Haftalık Rutin Önerisi</h3>
     <ul>
       <li><strong>Sabah (09-12):</strong> FarmBridge (en acil, en taze kafa)</li>
-      <li><strong>Öğleden sonra (13-16):</strong> TradeBot veya beklemedeki projelerin geri bildirimi geldiyse onlar</li>
-      <li><strong>Akşam (17-20):</strong> Daha rahat iş — TradeBot izleme, StudyBird (başlanırsa), araştırma</li>
+      <li><strong>Öğleden sonra (13-16):</strong> CopyBot v2 veya beklemedeki projelerin geri bildirimi geldiyse onlar</li>
+      <li><strong>Akşam (17-20):</strong> Daha rahat iş — CopyBot v2 araştırma/test, StudyBird (başlanırsa)</li>
       <li><strong>Pazar akşamı:</strong> Haftalık review + gelecek hafta planı (bu dashboard'u güncelle)</li>
     </ul>
   </div>
@@ -891,7 +890,7 @@
     <h3>Riskler</h3>
     <ul>
       <li><strong>FarmBridge PMR gecikmesi:</strong> Restoran görüşmeleri bu hafta başlamazsa DE 7-12 veri desteksiz kalır. Bu hafta en az 2 restoran görüşmesi hedefle.</li>
-      <li><strong>TradeBot SELL sorunu:</strong> Balance/allowance hatası çözülmezse pozisyonlar kilitli kalır. Bu teknik borcu bu hafta kapat.</li>
+      <li><strong>CopyBot v2 disiplin riski:</strong> v1'de "hızlı prototip" tuzağına düşüldü. v2'de her fazda test-then-advance uygulanmalı. Acele etme dürtüsüne karşı lessons-learned dokümanını referans al.</li>
       <li><strong>Yoğunluk yönetimi:</strong> 5 aktif proje (2'si beklemede olsa da) + ana iş (market making). FarmBridge en acil, öncelik kaymasın.</li>
     </ul>
   </div>
