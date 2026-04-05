@@ -447,7 +447,8 @@
 <!-- TABS -->
 <div class="tabs">
   <button class="tab active" onclick="showTab('projects')">Projeler</button>
-  <button class="tab" onclick="showTab('weekly')">Haftalık Plan</button>
+  <button class="tab" onclick="showTab('schedule')">Haftalık Program</button>
+  <button class="tab" onclick="showTab('weekly')">Hafta Bazlı Yapılanlar</button>
   <button class="tab" onclick="showTab('actions')">Aksiyonlar</button>
   <button class="tab" onclick="showTab('timeline')">Zaman Çizelgesi</button>
   <button class="tab" onclick="showTab('insights')">Notlar & Fırsatlar</button>
@@ -465,21 +466,22 @@
       </div>
       <div class="card-detail">KUICK Creation 2026 — Tarım tedarik zinciri şeffaflık platformu</div>
       <div class="card-detail"><strong>Framework:</strong> Disciplined Entrepreneurship</div>
-      <div class="card-detail"><strong>Aşama:</strong> DE Steps 0-6 tamamlandı, DE 6-12 + PMR'a geçiliyor</div>
+      <div class="card-detail"><strong>Aşama:</strong> DE Steps 0-6 tamamlandı, Hafta 2: field trip + mentor + DE 7-11</div>
       <div class="progress-bar">
         <div class="fill" style="width:35%; background: linear-gradient(90deg, var(--accent-green), #4ade80);"></div>
       </div>
       <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~35% (DE 6/24 + Week1 Report)</div>
 
-      <div class="card-detail" style="margin-top:12px;"><strong>Bu hafta tamamlanan:</strong></div>
-      <div class="card-detail">&#10003; Week 1 Progress Report (13 sayfa PDF)</div>
-      <div class="card-detail">&#10003; Akhisar saha ziyareti programı hazır</div>
-      <div class="card-detail">&#10003; Mentor görüşmesi yapıldı (01.04)</div>
-      <div class="card-detail">&#10003; DE Step 6 (Life Cycle Use Case) taslağı</div>
+      <div class="card-detail" style="margin-top:12px;"><strong>Bu hafta (06-12 Nisan):</strong></div>
+      <div class="card-detail">&#9679; Pzt: Qapera araştırması, ihracat fizibilitesi, restoran listesi (20+), PMR şablonu</div>
+      <div class="card-detail">&#9679; Salı: Akhisar field trip (Okan Mordal)</div>
+      <div class="card-detail">&#9679; Çar: Ziyaret raporu + 15:30 mentor meeting + MIT Orbit</div>
+      <div class="card-detail">&#9679; Per: DE Steps 7-11 + Lovable UI başlangıcı</div>
+      <div class="card-detail">&#9679; Cuma: Son kontrol + 14:00 KUICK weekly</div>
 
       <div class="next-action">
-        <div class="label">Sonraki Aksiyonlar</div>
-        Akhisar field trip (bu hafta) &#8594; Restoran PMR başlat &#8594; Qapera görüşmesi &#8594; Concierge test planı &#8594; DE 6-12
+        <div class="label">11 Hedeflenen Çıktı</div>
+        Qapera dokümanı, ihracat fizibilitesi, restoran listesi, PMR şablonu, ziyaret raporu, mentor prep, mentor notları, DE 7-11, Lovable UI, KUICK özet, agent kurulumu (h/s)
       </div>
     </div>
 
@@ -491,25 +493,23 @@
       </div>
       <div class="card-detail">Polymarket copytrade botu — v1'den 18 bug dersiyle sıfırdan inşa</div>
       <div class="card-detail"><strong>Stack:</strong> Python 3 + Flask (Blueprint) + WebSocket</div>
-      <div class="card-detail"><strong>Aşama:</strong> Planlama tamamlandı, Faz 0 (API araştırma) başlayacak</div>
+      <div class="card-detail"><strong>Aşama:</strong> Faz 0 + Faz 1 bu hafta tamamlanacak</div>
       <div class="progress-bar">
         <div class="fill" style="width:5%; background: linear-gradient(90deg, var(--accent-purple), #c084fc);"></div>
       </div>
       <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~5% (Planlama / 6 Faz)</div>
 
-      <div class="card-detail" style="margin-top:12px;"><strong>v1 retrospektifi (05.04):</strong></div>
-      <div class="card-detail">&#10003; 18 bug kataloglandı, kök neden analizi yapıldı</div>
-      <div class="card-detail">&#10003; Çalışma tarzı geri bildirimi kaydedildi</div>
-      <div class="card-detail">&#10003; v2 yol haritası oluşturuldu (6 faz)</div>
-      <div class="card-detail">&#10003; Proje yapısı ve mimari kararlar belirlendi</div>
+      <div class="card-detail" style="margin-top:12px;"><strong>Bu hafta hedef:</strong></div>
+      <div class="card-detail">&#9679; Faz 0: API docs detaylı araştırma — tüm sınırlar belgelenir</div>
+      <div class="card-detail">&#9679; Faz 1: Trader seçim algoritması + backtesting + Panel 1</div>
 
       <div class="next-action">
-        <div class="label">6 Fazlı Yol Haritası</div>
-        Faz 0: API araştırma &#8594; Faz 1: Trader algoritması + backtesting &#8594; Faz 2: Günlük tarama &#8594; Faz 3: Pozisyon izleme &#8594; Faz 4: Order execution &#8594; Faz 5: Birleştirme + Master Panel
+        <div class="label">Faz 0 Çıkış Kriteri</div>
+        Her API endpoint için test scripti + belgelenmiş davranış (api-constraints.md)
       </div>
       <div class="next-action" style="margin-top:8px; border-left-color: var(--accent-purple);">
-        <div class="label" style="color: var(--accent-purple);">Sonraki Adım</div>
-        Faz 0: CLOB/Data/Gamma API rate limit testi + WebSocket bağlantı testi + orderbook yapısı analizi
+        <div class="label" style="color: var(--accent-purple);">Faz 1 Çıkış Kriteri</div>
+        Backtestle doğrulanmış scoring fonksiyonu + çalışan Trader Bulma Paneli
       </div>
     </div>
 
@@ -517,15 +517,15 @@
     <div class="project-card" style="border-top: 3px solid var(--accent-blue);">
       <div class="card-header">
         <h3>Bergama Futbol</h3>
-        <span class="badge waiting">Bekleme</span>
+        <span class="badge active">Aktif</span>
       </div>
       <div class="card-detail">Bergama Belediyesi futbol altyapı projesi danışmanlığı</div>
       <div class="card-detail"><strong>Kapsam:</strong> A Takım + Akademi (U13-U19) + Futbol Okulları (6-12 yaş)</div>
-      <div class="card-detail"><strong>Aşama:</strong> PPTX sunum tamamlandı, belediye geri bildirimi bekleniyor</div>
+      <div class="card-detail"><strong>Aşama:</strong> Hafta sonu sunum finalize edilecek</div>
       <div class="progress-bar">
-        <div class="fill" style="width:40%; background: linear-gradient(90deg, var(--accent-blue), #60a5fa);"></div>
+        <div class="fill" style="width:45%; background: linear-gradient(90deg, var(--accent-blue), #60a5fa);"></div>
       </div>
-      <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~40%</div>
+      <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~45%</div>
 
       <div class="card-detail" style="margin-top:12px;"><strong>Tamamlanan çıktılar:</strong></div>
       <div class="card-detail">&#10003; PPTX sunum (20 slayt — Altınordu modeli referans)</div>
@@ -533,8 +533,8 @@
       <div class="card-detail">&#10003; Organizasyon şeması</div>
 
       <div class="next-action">
-        <div class="label">Sonraki Adım</div>
-        Koordinatör belediyeye sunacak &#8594; Geri bildirim geldiğinde detaylı proje dosyası + bütçe tablosu
+        <div class="label">Bu Hafta</div>
+        Hafta sonu: Son dokunuşlar ve finalize &#8594; Koordinatöre teslime hazır
       </div>
     </div>
 
@@ -552,12 +552,13 @@
       </div>
       <div class="card-detail" style="text-align:right; font-size:12px;">ETF Video İlerleme: ~60% (Draft 2/4)</div>
 
-      <div class="card-detail" style="margin-top:12px;"><strong>Draft 2 stili:</strong></div>
-      <div class="card-detail">Typewriter animasyon + bold sans-serif + finans app estetiği</div>
+      <div class="card-detail" style="margin-top:12px;"><strong>Bu hafta:</strong></div>
+      <div class="card-detail">&#9679; AI seslendirme uygulaması denemesi (farklı diller)</div>
+      <div class="card-detail">&#9679; Altyazı ekleme yöntemi belirleme</div>
 
       <div class="next-action">
         <div class="label">Sonraki Adım</div>
-        Müşteriden Draft 2 geri bildirimi bekleniyor &#8594; Draft 3 (tasarim finalize)
+        AI dubbing + altyazı araştırması &#8594; Müşteri feedback bekliyor &#8594; Draft 3
       </div>
     </div>
 
@@ -569,27 +570,155 @@
       </div>
       <div class="card-detail">Flappy Bird tarzı quiz oyunu — öğrenme projesi</div>
       <div class="card-detail"><strong>Motor:</strong> Godot Engine 4.x (React Native'den geçiş)</div>
-      <div class="card-detail"><strong>Aşama:</strong> Godot kurulumu + Game Studios entegrasyonu bekliyor</div>
+      <div class="card-detail"><strong>Aşama:</strong> Bu hafta kurulum ve taşıma başlıyor</div>
       <div class="progress-bar">
         <div class="fill" style="width:10%; background: linear-gradient(90deg, var(--accent-teal), #5eead4);"></div>
       </div>
       <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~10%</div>
 
+      <div class="card-detail" style="margin-top:12px;"><strong>Bu hafta:</strong></div>
+      <div class="card-detail">&#9679; Claude Code Game Studios kurulumu + agent yapısını öğrenme</div>
+      <div class="card-detail">&#9679; Godot 4.x kurulumu + proje yapısı</div>
+      <div class="card-detail">&#9679; React Native'den Godot'a taşıma başlatma</div>
+
       <div class="next-action">
         <div class="label">Sonraki Adım</div>
-        Godot 4.x kurulumu &#8594; Claude Code Game Studios entegrasyonu &#8594; Temel mekanik prototipi
+        Game Studios kurulumu &#8594; Godot 4.x kurulumu &#8594; Proje taşıma &#8594; Temel mekanik prototipi
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- TAB 2: HAFTALIK PLAN -->
+<!-- TAB: HAFTALIK PROGRAM -->
+<div id="schedule" class="tab-content">
+  <h3 style="margin-bottom:16px; font-size:16px;">Haftalık Program — 6-12 Nisan 2026 (Pzt-Pzr)</h3>
+  <p style="color:var(--text-dim); margin-bottom:16px; font-size:13px;">Yula (market making) pasif iş — bilgisayar başında durmak yeterli, diğer işleri engellemez.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Gün</th>
+        <th>Yula Saatleri</th>
+        <th>Sabit Etkinlikler</th>
+        <th>Proje Odağı</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Pazartesi</strong></td>
+        <td>—</td>
+        <td>—</td>
+        <td><span class="project-tag tag-farmbridge">FarmBridge</span> Hazırlık: Qapera araştırması, ihracat fizibilitesi, restoran listesi, PMR şablonu, mentor taslağı</td>
+      </tr>
+      <tr>
+        <td><strong>Salı</strong></td>
+        <td>—</td>
+        <td style="color:var(--accent-green); font-weight:600;">Akhisar Field Trip (11:00-17:00)</td>
+        <td><span class="project-tag tag-farmbridge">FarmBridge</span> Saha ziyareti + akşam ham notlar</td>
+      </tr>
+      <tr>
+        <td><strong>Çarşamba</strong></td>
+        <td style="color:var(--accent-orange);">17:00 – 01:00</td>
+        <td style="color:var(--accent-green); font-weight:600;">Mentor Meeting (15:30)</td>
+        <td><span class="project-tag tag-farmbridge">FarmBridge</span> Ziyaret raporu + mentor prep + MIT Orbit</td>
+      </tr>
+      <tr>
+        <td><strong>Perşembe</strong></td>
+        <td style="color:var(--accent-orange);">08:00 – 17:00</td>
+        <td>—</td>
+        <td><span class="project-tag tag-farmbridge">FarmBridge</span> DE Steps 7-11 + Lovable UI</td>
+      </tr>
+      <tr>
+        <td><strong>Cuma</strong></td>
+        <td style="color:var(--accent-orange);">01:00 – 08:00</td>
+        <td style="color:var(--accent-green); font-weight:600;">KUICK Weekly (14:00)</td>
+        <td><span class="project-tag tag-farmbridge">FarmBridge</span> Son kontrol + toplantı</td>
+      </tr>
+      <tr>
+        <td><strong>Cumartesi</strong></td>
+        <td style="color:var(--accent-orange);">17:00 – 01:00</td>
+        <td>—</td>
+        <td><span class="project-tag tag-bergama">Bergama</span> Sunum finalize + <span class="project-tag tag-farmbridge">FarmBridge</span> Agent kurulumu</td>
+      </tr>
+      <tr>
+        <td><strong>Pazar</strong></td>
+        <td>—</td>
+        <td>—</td>
+        <td>Haftalık review + gelecek hafta planı</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="insight-card" style="margin-top:20px;">
+    <h3>Diğer Projeler (Deadline Yok — Zaman Yönetimi Serbest)</h3>
+    <ul>
+      <li><span class="project-tag tag-tradebot">CopyBot v2</span> Faz 0 (API araştırma) + Faz 1 (trader algo + backtest + Panel 1)</li>
+      <li><span class="project-tag tag-bridgegate">BridgeGate</span> AI seslendirme uygulaması denemesi + altyazı ekleme</li>
+      <li><span class="project-tag tag-studybird">StudyBird</span> Game Studios kurulumu + Godot 4.x + proje taşıma</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TAB: HAFTA BAZLI YAPILANLAR -->
 <div id="weekly" class="tab-content">
 
-  <!-- GECEN HAFTA -->
+  <!-- 23-29 MART -->
   <div class="week-section">
-    <h3><span class="dot" style="background:var(--accent-green);"></span> Geçen Hafta: 30 Mart – 5 Nisan 2026</h3>
+    <h3><span class="dot" style="background:var(--text-dim);"></span> 23 – 29 Mart (Pzt-Pzr)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Durum</th>
+          <th>Proje</th>
+          <th>Görev</th>
+          <th>Detay</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>Proje başlangıcı + Claude Cowork altyapısı</td>
+          <td>KUICK Creation 2026 için seçildi, mentor briefing hazırlandı</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>DE Steps 0-6 + Canvas'lar</td>
+          <td>Market Pull, Tech Push, Hybrid Canvas + segmentasyon, beachhead, persona, TAM, life cycle</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>KUICK Kickoff toplantısı (27.03)</td>
+          <td>Genel olumlu geri bildirim alındı</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>Hafta 2 planlama + soru listeleri</td>
+          <td>Mentor ve hoca görüşmeleri için sorular hazırlandı</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="project-tag tag-bridgegate">BridgeGate</span></td>
+          <td>Video editing projesi başlatıldı</td>
+          <td>Brief oluşturuldu, iş akışı belirlendi</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="project-tag tag-studybird">StudyBird</span></td>
+          <td>Oyun projesi başlatıldı</td>
+          <td>Brief oluşturuldu, GitHub repo açıldı, React Native kurulumu</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 30 MART - 5 NİSAN -->
+  <div class="week-section">
+    <h3><span class="dot" style="background:var(--accent-green);"></span> 30 Mart – 5 Nisan (Pzt-Pzr)</h3>
     <table>
       <thead>
         <tr>
@@ -646,66 +775,102 @@
     </table>
   </div>
 
-  <!-- BU HAFTA (placeholder) -->
+  <!-- BU HAFTA -->
   <div class="week-section">
-    <h3><span class="dot" style="background:var(--accent-blue);"></span> Bu Hafta: 6 – 12 Nisan 2026 (planlanacak)</h3>
+    <h3><span class="dot" style="background:var(--accent-blue);"></span> Bu Hafta: 6 – 12 Nisan (Pzt-Pzr)</h3>
     <table>
       <thead>
         <tr>
           <th>Durum</th>
           <th>Proje</th>
           <th>Görev</th>
-          <th>Deadline</th>
+          <th>Detay</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><span class="status-dot status-pending"></span>Bekliyor</td>
           <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
-          <td>Akhisar field trip + notları kaydet</td>
-          <td>Bu hafta içi</td>
+          <td>Qapera araştırma dokümanı</td>
+          <td>Şirket analizi + kurucu görüşmesi soruları</td>
         </tr>
         <tr>
           <td><span class="status-dot status-pending"></span>Bekliyor</td>
           <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
-          <td>Restoran tarafı PMR görüşmeleri başlat</td>
-          <td>Bu hafta</td>
+          <td>İhracat fizibilite raporu (v1)</td>
+          <td>KOSGEB destekleri, şirket kurma, organik ihracat gereksinimleri</td>
         </tr>
         <tr>
           <td><span class="status-dot status-pending"></span>Bekliyor</td>
           <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
-          <td>Qapera kurucusuyla görüşme ayarla</td>
-          <td>Bu hafta</td>
+          <td>Restoran listesi (20+) + PMR soru şablonu</td>
+          <td>İstanbul FtT restoranlar, iletişim bilgileri, görüşme formatı</td>
         </tr>
         <tr>
           <td><span class="status-dot status-pending"></span>Bekliyor</td>
           <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
-          <td>DE Steps 7-12'ye başla</td>
-          <td>Hafta sonu</td>
+          <td>Akhisar field trip (Salı) + ziyaret raporu</td>
+          <td>Okan Mordal, çiftçi sohbetleri, borsa/tesis ziyareti</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>Mentor meeting (Çar 15:30) + prep + notlar</td>
+          <td>Ziyaret bulguları, MIT Orbit, ihracat modeli, PMR planı</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>DE Steps 7-11 tamamla</td>
+          <td>Product spec, value prop, next 10, core, competitive position</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>Lovable UI basit başlangıç</td>
+          <td>Alışma amaçlı — farmer + restoran tarafı örnek isimlerle</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>KUICK weekly (Cuma 14:00)</td>
+          <td>Hafta 2 progress özeti</td>
         </tr>
         <tr>
           <td><span class="status-dot status-pending"></span>Bekliyor</td>
           <td><span class="project-tag tag-tradebot">CopyBot v2</span></td>
-          <td>Faz 0: API araştırma (rate limit, WebSocket, orderbook)</td>
-          <td>Hafta başı</td>
+          <td>Faz 0: API docs detaylı araştırma</td>
+          <td>Rate limit, WebSocket, orderbook, Gamma güvenilirlik &#8594; api-constraints.md</td>
         </tr>
         <tr>
           <td><span class="status-dot status-pending"></span>Bekliyor</td>
           <td><span class="project-tag tag-tradebot">CopyBot v2</span></td>
-          <td>Faz 1: Trader seçim algoritması tasarımına başla</td>
-          <td>Faz 0 sonrası</td>
+          <td>Faz 1: Trader algo + backtest + Panel 1</td>
+          <td>Scoring fonksiyonu, backtesting engine, Trader Bulma Paneli</td>
         </tr>
         <tr>
-          <td><span class="status-dot status-waiting"></span>Geri Bildirim</td>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
           <td><span class="project-tag tag-bergama">Bergama</span></td>
-          <td>Belediye geri bildirimi bekle</td>
-          <td>—</td>
+          <td>Sunum son dokunuşlar + finalize</td>
+          <td>Hafta sonu tamamlanacak</td>
         </tr>
         <tr>
-          <td><span class="status-dot status-waiting"></span>Geri Bildirim</td>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
           <td><span class="project-tag tag-bridgegate">BridgeGate</span></td>
-          <td>Draft 2 geri bildirimi bekle</td>
-          <td>—</td>
+          <td>AI seslendirme uygulaması + altyazı ekleme</td>
+          <td>Farklı dillerde dubbing denemesi</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="project-tag tag-studybird">StudyBird</span></td>
+          <td>Game Studios + Godot kurulumu + proje taşıma</td>
+          <td>Agent yapısını öğrenme, React Native &#8594; Godot</td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="project-tag tag-farmbridge">FarmBridge</span></td>
+          <td>Agent kurulumu (hafta sonu)</td>
+          <td>Günlük araştırma + raporlama agent'ları</td>
         </tr>
       </tbody>
     </table>
@@ -719,63 +884,73 @@
   <ul class="action-list">
     <li class="action-item">
       <span class="project-tag tag-farmbridge">FarmBridge</span>
-      <span>Akhisar field trip'i gerçekleştir, notları brief'e ekle</span>
-      <span class="deadline soon">Bu hafta</span>
+      <span>Qapera araştırma dokümanı + kurucu görüşmesi soruları</span>
+      <span class="deadline soon">Pazartesi</span>
     </li>
     <li class="action-item">
       <span class="project-tag tag-farmbridge">FarmBridge</span>
-      <span>Restoran tarafı PMR görüşmeleri başlat (en az 3 restoran)</span>
-      <span class="deadline soon">Bu hafta</span>
+      <span>İhracat fizibilite raporu (KOSGEB, şirket kurma, organik ihracat)</span>
+      <span class="deadline soon">Pazartesi</span>
     </li>
     <li class="action-item">
       <span class="project-tag tag-farmbridge">FarmBridge</span>
-      <span>Qapera kurucusuyla görüşme ayarla + sorular hazır (brief'te mevcut)</span>
-      <span class="deadline soon">Bu hafta</span>
+      <span>İstanbul FtT restoran listesi (20+) + PMR soru şablonu</span>
+      <span class="deadline soon">Pazartesi</span>
     </li>
     <li class="action-item">
       <span class="project-tag tag-farmbridge">FarmBridge</span>
-      <span>Concierge test planı oluştur</span>
-      <span class="deadline">Gelecek hafta</span>
+      <span>Akhisar field trip + detaylı ziyaret raporu</span>
+      <span class="deadline soon">Salı-Çarşamba</span>
     </li>
     <li class="action-item">
       <span class="project-tag tag-farmbridge">FarmBridge</span>
-      <span>Gelir modeli sweet spot analizi — "parayi kim verecek?"</span>
-      <span class="deadline">Gelecek mentor toplantısı</span>
+      <span>Mentor meeting hazırlık + notlar (Çar 15:30)</span>
+      <span class="deadline soon">Çarşamba</span>
     </li>
     <li class="action-item">
       <span class="project-tag tag-farmbridge">FarmBridge</span>
-      <span>Belirsiz konulari netleştir: kalite kontrol, lojistik modeli</span>
-      <span class="deadline">Gelecek mentor toplantısı</span>
+      <span>DE Steps 7-11 tamamla (KUICK weekly'ye kadar)</span>
+      <span class="deadline soon">Cuma 14:00</span>
     </li>
     <li class="action-item">
       <span class="project-tag tag-farmbridge">FarmBridge</span>
-      <span>DE Steps 7-12 (product specs, value prop, core & moats, DMU)</span>
-      <span class="deadline">Hafta 4-6 arası</span>
+      <span>Lovable UI basit başlangıç (alışma amaçlı)</span>
+      <span class="deadline">Perşembe</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-farmbridge">FarmBridge</span>
+      <span>Günlük araştırma agent'ları kurulumu</span>
+      <span class="deadline">Hafta sonu</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-farmbridge">FarmBridge</span>
+      <span>Restoran PMR iletişimine başla (mentor onayı sonrası)</span>
+      <span class="deadline">Hafta sonu</span>
     </li>
     <li class="action-item">
       <span class="project-tag tag-tradebot">CopyBot v2</span>
-      <span>Faz 0: API constraint belirleme (CLOB, Data, Gamma rate limit + WebSocket + orderbook)</span>
+      <span>Faz 0: API docs detaylı araştırma + api-constraints.md</span>
       <span class="deadline soon">Bu hafta</span>
     </li>
     <li class="action-item">
       <span class="project-tag tag-tradebot">CopyBot v2</span>
-      <span>Faz 1: Trader seçim algoritması + backtesting engine</span>
-      <span class="deadline">Faz 0 sonrası</span>
-    </li>
-    <li class="action-item">
-      <span class="project-tag tag-tradebot">CopyBot v2</span>
-      <span>3 Panel: Trader Bulma, Trader Takip, Pozisyon Yönetimi &#8594; Master Panel</span>
-      <span class="deadline">Faz 4-6</span>
+      <span>Faz 1: Trader algo + backtesting + Trader Bulma Paneli</span>
+      <span class="deadline soon">Bu hafta</span>
     </li>
     <li class="action-item">
       <span class="project-tag tag-bergama">Bergama</span>
-      <span>Belediye geri bildirimi geldiğinde detaylı proje dosyası + bütçe tablosu</span>
-      <span class="deadline" style="color:var(--text-dim);">Beklemede</span>
+      <span>Sunum son dokunuşlar + finalize</span>
+      <span class="deadline">Hafta sonu</span>
     </li>
     <li class="action-item">
       <span class="project-tag tag-bridgegate">BridgeGate</span>
-      <span>Draft 2 geri bildirimi geldiğinde Draft 3 (tasarim finalize)</span>
-      <span class="deadline" style="color:var(--text-dim);">Beklemede</span>
+      <span>AI seslendirme uygulaması + altyazı ekleme denemesi</span>
+      <span class="deadline">Bu hafta</span>
+    </li>
+    <li class="action-item">
+      <span class="project-tag tag-studybird">StudyBird</span>
+      <span>Game Studios kurulumu + Godot 4.x + proje taşıma</span>
+      <span class="deadline">Bu hafta</span>
     </li>
   </ul>
 </div>
@@ -788,7 +963,19 @@
     <div class="timeline-item">
       <div class="timeline-date">05.04</div>
       <div class="timeline-content">
+        <strong>Genel:</strong> Hafta 2 planı oluşturuldu (6-12 Nisan) — FarmBridge 11 çıktı hedefli, CopyBot v2 Faz 0+1, Bergama finalize, BridgeGate AI dubbing, StudyBird Godot kurulumu. Dashboard'a Haftalık Program sekmesi eklendi.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">05.04</div>
+      <div class="timeline-content">
         <strong>CopyBot:</strong> v1 arşivlendi (18 bug kataloğu + lessons learned). v2 planlama tamamlandı: 6 faz, WebSocket-first mimari, 3 panel, orderbook fiyatlama, backtesting. Sıfırdan yeni klasör (CopyBot-v2/)
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">05.04</div>
+      <div class="timeline-content">
+        <strong>FarmBridge:</strong> MIT Orbit DE Jetpack ile DE Steps 1-5 karşılaştırması. 6 eksik tespit edildi ve eklendi: broker segmenti, B2C follow-on, Economic Buyer ayrımı, TAM ek metrikleri (profitability/CAGR/market share), proxy products, watering holes, priority weightings. Startup Tactics + DE Canvas eklemeleri sonraki oturuma park edildi.
       </div>
     </div>
     <div class="timeline-item">
@@ -857,41 +1044,34 @@
 <div id="insights" class="tab-content">
 
   <div class="insight-card">
-    <h3>Bu Haftanın Önemli Çıkarımları</h3>
+    <h3>Bu Haftanın Önemli Noktaları</h3>
     <ul>
-      <li><strong>CopyBot v1 → v2 geçişi:</strong> v1 5 günde 18 bug ve $20 kayıp üretti. Hız öncelikli yaklaşım sonuçta daha yavaş oldu (bug fix > geliştirme). v2'de test-then-advance prensibi: her modül kanıtlanmadan sonraki adıma geçilmeyecek. Aynı hatalar değil, yeni hatalar yapmak hedef.</li>
-      <li><strong>FarmBridge mentor geri bildirimi kritik:</strong> "Parayi kim verecek?" sorusu projenin sacayağı. Restoran PMR bu soruyu cevaplamak için en önemli adim. Akhisar ziyareti + restoran PMR paralel gitmeli.</li>
-      <li><strong>Bergama + BridgeGate bekleme modunda:</strong> Iki proje de geri bildirim bekliyor. Bu süreci FarmBridge ve CopyBot v2'ye odaklanmak için kullan.</li>
-      <li><strong>StudyBird ilerleme yok:</strong> 2 haftadir başlanamıyor. Öncelik sıralamasında en altta, makul — ama her hafta "yapılmadı" olarak kalması motivasyonu düşürür. Ya somut bir baslanma tarihi koy ya da bilinçli olarak "park edildi" yap.</li>
+      <li><strong>FarmBridge en yoğun haftası:</strong> 3 sabit etkinlik (Salı field trip, Çarşamba mentor, Cuma KUICK) + DE 7-11 + 11 çıktı. Perşembe kritik gün — DE adımları burada bitirilmeli.</li>
+      <li><strong>İhracat fizibilitesi yeni gündem:</strong> Platform kurulurken bootstrap gelir modeli olarak aracılardan ürün ihracatı araştırılacak. KOSGEB sertifikaları avantaj. Aracıları platforma çekme stratejisi olarak da değerli.</li>
+      <li><strong>CopyBot v2 Faz 0+1 paralel:</strong> API araştırma + trader algo + backtest. v1'in en büyük dersi: API davranışını doğrulamadan kod yazmaya başlama. Bu sefer Faz 0 atlanmayacak.</li>
+      <li><strong>Bergama finalize hafta sonu:</strong> Son dokunuşlar, koordinatöre teslime hazır.</li>
+      <li><strong>BridgeGate + StudyBird aktif oluyor:</strong> AI dubbing denemesi ve Godot kurulumu bu hafta başlıyor. Deadline yok, zaman bulundukça ilerlenecek.</li>
     </ul>
   </div>
 
   <div class="insight-card">
     <h3>Fırsatlar ve Öneriler</h3>
     <ul>
-      <li><strong>Qapera görüşmesi yüksek değerli:</strong> Restoran tarafının acıları, SaaS fiyatlama deneyimi, KUICK/KWORKS iç bilgisi — tek görüşmede 3 farklı insight alabilirsin. Bunu önceliklendir.</li>
-      <li><strong>CopyBot v2 WebSocket-first:</strong> v2 baştan WebSocket ile tasarlanacak. Bu trailing stop, hızlı çıkış ve gerçek zamanlı fiyat için kritik. Polymarket CLOB API WebSocket desteği var — Faz 0'da test edilecek.</li>
-      <li><strong>N8N entegrasyonu:</strong> CopyBot v2 panel bildirimleri, FarmBridge PMR takibi, proje durum güncellemeleri — bunları N8N ile otomatikleştirmek mümkün. Özellikle Telegram bildirimlerini merkezi bir yere toplama.</li>
-      <li><strong>FarmBridge concierge test:</strong> MVP kodlamadan once manuel olarak 1-2 restoran + 1-2 çiftçi arasında "insan-powered marketplace" yap. WhatsApp grubu + Google Sheets yeterli. Bu hem PMR hem traction gösterir.</li>
-    </ul>
-  </div>
-
-  <div class="insight-card">
-    <h3>Haftalık Rutin Önerisi</h3>
-    <ul>
-      <li><strong>Sabah (09-12):</strong> FarmBridge (en acil, en taze kafa)</li>
-      <li><strong>Öğleden sonra (13-16):</strong> CopyBot v2 veya beklemedeki projelerin geri bildirimi geldiyse onlar</li>
-      <li><strong>Akşam (17-20):</strong> Daha rahat iş — CopyBot v2 araştırma/test, StudyBird (başlanırsa)</li>
-      <li><strong>Pazar akşamı:</strong> Haftalık review + gelecek hafta planı (bu dashboard'u güncelle)</li>
+      <li><strong>Akhisar field trip veri altın madeni:</strong> Hem DE adımlarını besleyecek (Step 8 value prop, Step 9 next 10 customers), hem ihracat fizibilitesi için somut veri sağlayacak. Saha notlarını detaylı tut.</li>
+      <li><strong>Qapera görüşmesi yüksek değerli:</strong> Restoran tarafının acıları, SaaS fiyatlama deneyimi, KUICK/KWORKS iç bilgisi — tek görüşmede 3 farklı insight. Pazartesi araştırma dokümanı hazırlanacak.</li>
+      <li><strong>İhracat = aracı ikna aracı:</strong> Aracılara "platforma gel, ihracat kanalı açılsın" demek güçlü bir değer önerisi. Bu FarmBridge'in chicken-egg problemine pratik çözüm olabilir.</li>
+      <li><strong>FarmBridge concierge test:</strong> MVP kodlamadan önce 1-2 restoran + 1-2 çiftçi arasında "insan-powered marketplace". WhatsApp + Google Sheets yeterli. Mentor meeting'de tartışılacak.</li>
+      <li><strong>Agent'lar hafta sonuna:</strong> Günlük tarım haberleri, rakip tarama, restoran trendleri agent'ları kurulacak. Haftalık otomatik raporlama.</li>
     </ul>
   </div>
 
   <div class="insight-card">
     <h3>Riskler</h3>
     <ul>
-      <li><strong>FarmBridge PMR gecikmesi:</strong> Restoran görüşmeleri bu hafta başlamazsa DE 7-12 veri desteksiz kalır. Bu hafta en az 2 restoran görüşmesi hedefle.</li>
-      <li><strong>CopyBot v2 disiplin riski:</strong> v1'de "hızlı prototip" tuzağına düşüldü. v2'de her fazda test-then-advance uygulanmalı. Acele etme dürtüsüne karşı lessons-learned dokümanını referans al.</li>
-      <li><strong>Yoğunluk yönetimi:</strong> 5 aktif proje (2'si beklemede olsa da) + ana iş (market making). FarmBridge en acil, öncelik kaymasın.</li>
+      <li><strong>Akhisar iptali:</strong> Field trip iptal/erteleme olursa DE adımları veri eksikliğiyle yazılır. B planı: telefon görüşmeleriyle PMR verisi topla.</li>
+      <li><strong>DE 7-11 zaman baskısı:</strong> 5 adım + Lovable UI tek Perşembe gününe sıkışıyor. Çarşamba akşamından DE'ye başlamak güvenli olur.</li>
+      <li><strong>CopyBot v2 disiplin riski:</strong> v1'de "hızlı prototip" tuzağına düşüldü. Faz 0'ı atlama veya kısaltma dürtüsüne karşı lessons-learned referans al.</li>
+      <li><strong>5 proje paralel:</strong> Bu hafta hepsi aktif. FarmBridge önceliği kaymasın — sabit etkinlikler bunu zorunlu kılıyor.</li>
     </ul>
   </div>
 </div>
