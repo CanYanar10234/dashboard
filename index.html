@@ -3,36 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Can — Proje Dashboard</title>
+<title>Can — FarmNara Dashboard</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+  /* ============================================================
+     FarmNara Dashboard — v2 Tasarım Sistemi (29.04.2026)
+     FarmNara Website v2 ile aynı tipografi, renk ve ritim
+     ============================================================ */
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&display=swap');
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html {
+    scroll-behavior: smooth;
+    min-height: 100vh;
+    /* FarmNara v2 hero arka planı — zeytin görseli + cream gradient overlay (aynı bulanıklık) */
+    background:
+      linear-gradient(to bottom, rgba(250,253,247,0.55) 0%, rgba(250,253,247,0.40) 60%, rgba(250,253,247,0.95) 100%),
+      url('hero_background.jpg') center center / cover no-repeat fixed;
+  }
 
   :root {
-    --bg: #0f1117;
-    --card: #1a1d27;
-    --card-hover: #222632;
-    --border: #2a2e3a;
-    --text: #e4e4e7;
-    --text-dim: #8b8d97;
-    --accent-green: #22c55e;
-    --accent-blue: #3b82f6;
-    --accent-orange: #f59e0b;
-    --accent-red: #ef4444;
-    --accent-purple: #a855f7;
-    --accent-teal: #14b8a6;
+    /* Renk sistemi — v2 ile aynı */
+    --green-dark: #2D5016;
+    --green-mid: #4A7C28;
+    --green-light: #6B9B3A;
+    --gold: #B8860B;
+    --gold-light: #D4A843;
+    --cream: #FAFDF7;
+    --cream-dark: #F0EDE4;
+    --white: #FFFFFF;
+
+    /* Dashboard semantic isimleri */
+    --bg: #FAFDF7;
+    --card: #FFFFFF;
+    --card-hover: #F0EDE4;
+    --border: rgba(45,80,22,0.10);
+    --border-strong: rgba(45,80,22,0.18);
+    --text: #2C2C2C;
+    --text-dim: #5A5A5A;
+    --accent-green: #2D5016;
+    --accent-green-mid: #4A7C28;
+    --accent-green-light: #6B9B3A;
+    --accent-blue: #4A7C28;     /* eski mavi yerine green-mid */
+    --accent-orange: #B8860B;   /* eski turuncu yerine gold */
+    --accent-red: #A33D2A;      /* uyarı/kritik için yumuşak kiremit */
+    --accent-purple: #6B4C8A;   /* yan proje arşiv referansı */
+    --accent-teal: #4A7C28;     /* yan proje arşiv referansı (yeşil-türevi) */
+
+    --shadow: 0 2px 16px rgba(45,80,22,0.08);
+    --shadow-lg: 0 8px 32px rgba(45,80,22,0.12);
+    --radius: 12px;
+    --radius-lg: 20px;
   }
 
   body {
-    font-family: 'Montserrat', -apple-system, sans-serif;
-    background: var(--bg);
+    font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: transparent;  /* html'in v2 hero arka planı (zeytin + cream gradient) görünsün */
     color: var(--text);
-    line-height: 1.6;
-    padding: 24px;
+    line-height: 1.7;
+    padding: 32px 24px 48px;
     max-width: 1400px;
     margin: 0 auto;
     -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.1px;
   }
 
   h1, h2, h3, h4, h5, h6,
@@ -40,8 +72,22 @@
   .project-card .card-header h3,
   .week-section h3,
   .insight-card h3,
-  .badge {
-    font-family: Georgia, 'Times New Roman', serif;
+  .badge,
+  .channel-card h4,
+  .archive-block h4 {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  }
+
+  a { text-decoration: none; color: var(--green-dark); border-bottom: 1px solid rgba(45,80,22,0.25); transition: border-color 0.2s; }
+  a:hover { border-bottom-color: var(--green-dark); }
+
+  code {
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    background: rgba(45,80,22,0.06);
+    color: var(--green-dark);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.92em;
   }
 
   /* HEADER */
@@ -52,189 +98,280 @@
     margin-bottom: 32px;
     flex-wrap: wrap;
     gap: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
   }
   .header h1 {
-    font-size: 28px;
-    font-weight: 700;
-    color: #fff;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--green-dark);
+    letter-spacing: -0.8px;
+    line-height: 1.15;
+    /* v2 hero stili — cream glow ile zeytin görseli üstünde okunabilirlik */
+    text-shadow: 0 0 16px rgba(250,253,247,0.85), 0 0 32px rgba(250,253,247,0.55);
+  }
+  .header h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 600;
+    text-shadow: 0 0 16px rgba(250,253,247,0.85), 0 0 24px rgba(250,253,247,0.5);
   }
   .header .subtitle {
-    font-size: 14px;
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
     color: var(--text-dim);
-    margin-top: 4px;
+    margin-top: 8px;
+    max-width: 760px;
+    line-height: 1.6;
+    text-shadow: 0 0 12px rgba(250,253,247,0.85);
   }
   .quick-stats {
     display: flex;
-    gap: 16px;
+    gap: 12px;
     flex-wrap: wrap;
   }
   .stat-pill {
-    background: var(--card);
+    background: var(--white);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px 20px;
+    border-radius: var(--radius);
+    padding: 14px 22px;
     text-align: center;
-    min-width: 120px;
+    min-width: 130px;
+    box-shadow: var(--shadow);
   }
   .stat-pill .number {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 22px;
+    font-weight: 800;
     display: block;
+    color: var(--green-dark);
+    letter-spacing: -0.3px;
   }
   .stat-pill .label {
+    font-family: 'Sora', sans-serif;
     font-size: 11px;
     color: var(--text-dim);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
+    font-weight: 500;
+    margin-top: 2px;
   }
 
   /* TABS */
   .tabs {
     display: flex;
     gap: 4px;
-    margin-bottom: 24px;
-    background: var(--card);
-    border-radius: 12px;
-    padding: 4px;
+    margin-bottom: 28px;
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 5px;
     border: 1px solid var(--border);
     overflow-x: auto;
+    box-shadow: var(--shadow);
   }
   .tab {
-    padding: 10px 20px;
+    font-family: 'Sora', sans-serif;
+    padding: 11px 22px;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
     color: var(--text-dim);
-    transition: all 0.2s;
+    transition: all 0.25s;
     white-space: nowrap;
     border: none;
     background: none;
+    letter-spacing: 0.2px;
   }
-  .tab:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-  .tab.active { color: #fff; background: var(--accent-blue); }
+  .tab:hover { color: var(--green-dark); background: rgba(45,80,22,0.04); }
+  .tab.active {
+    color: var(--white);
+    background: var(--green-dark);
+    box-shadow: 0 4px 12px rgba(45,80,22,0.20);
+  }
 
   /* TAB CONTENT */
   .tab-content { display: none; }
-  .tab-content.active { display: block; }
+  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Tab-content'in direct child'ı olan başlık/paragraflar (kart dışı) — zeytin arka plan üzerinde cream glow */
+  .tab-content > h3,
+  .tab-content > h4,
+  .tab-content > p {
+    text-shadow: 0 0 12px rgba(250,253,247,0.85), 0 0 24px rgba(250,253,247,0.55);
+  }
+
+  /* TAB-CARD — Aksiyonlar + Haftalık Program tab'ları için tek beyaz wrapper kart */
+  .tab-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
+  }
+  .tab-card > h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 18px;
+    letter-spacing: -0.3px;
+  }
+  .tab-card > h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin: 24px 0 10px 0;
+    letter-spacing: -0.2px;
+  }
+  /* Wrapper içindeki action-item'ler — kart-on-kart olmasın, sade satır */
+  .tab-card .action-item {
+    background: var(--cream-dark);
+    box-shadow: none;
+    border-color: rgba(45,80,22,0.06);
+  }
+  .tab-card .action-item:hover {
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border-color: var(--border-strong);
+  }
 
   /* PROJECT CARDS */
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    gap: 16px;
+    gap: 18px;
     margin-bottom: 24px;
   }
   .project-card {
-    background: var(--card);
+    background: var(--white);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
-    transition: border-color 0.2s;
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    transition: all 0.3s;
+    box-shadow: var(--shadow);
   }
-  .project-card:hover { border-color: rgba(255,255,255,0.15); }
+  .project-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
   .project-card .card-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 16px;
+    gap: 12px;
   }
   .project-card .card-header h3 {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green-dark);
+    letter-spacing: -0.3px;
   }
   .badge {
     display: inline-block;
-    padding: 4px 10px;
+    padding: 5px 12px;
     border-radius: 6px;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.4px;
   }
-  .badge.urgent { background: rgba(239,68,68,0.15); color: var(--accent-red); }
-  .badge.active { background: rgba(34,197,94,0.15); color: var(--accent-green); }
-  .badge.waiting { background: rgba(245,158,11,0.15); color: var(--accent-orange); }
-  .badge.paused { background: rgba(139,141,151,0.15); color: var(--text-dim); }
+  .badge.urgent { background: rgba(184,134,11,0.10); color: var(--gold); border: 1px solid rgba(184,134,11,0.25); }
+  .badge.active { background: rgba(45,80,22,0.08); color: var(--green-dark); border: 1px solid rgba(45,80,22,0.18); }
+  .badge.waiting { background: rgba(184,134,11,0.08); color: var(--gold); border: 1px solid rgba(184,134,11,0.20); }
+  .badge.paused { background: rgba(90,90,90,0.06); color: var(--text-dim); border: 1px solid rgba(90,90,90,0.15); }
 
   .progress-bar {
     width: 100%;
     height: 6px;
-    background: rgba(255,255,255,0.08);
+    background: rgba(45,80,22,0.08);
     border-radius: 3px;
-    margin: 12px 0;
+    margin: 14px 0;
     overflow: hidden;
   }
   .progress-bar .fill {
     height: 100%;
     border-radius: 3px;
     transition: width 0.5s ease;
+    background: linear-gradient(90deg, var(--green-dark), var(--green-mid), var(--gold-light)) !important;
   }
 
   .card-detail {
+    font-family: 'Sora', sans-serif;
     font-size: 13px;
     color: var(--text-dim);
     margin-bottom: 8px;
+    line-height: 1.6;
   }
-  .card-detail strong {
-    color: var(--text);
-  }
+  .card-detail strong { color: var(--text); font-weight: 600; }
+  .card-detail a { color: var(--green-dark); }
 
   .next-action {
-    margin-top: 16px;
-    padding: 12px;
-    background: rgba(59,130,246,0.08);
-    border-radius: 8px;
-    border-left: 3px solid var(--accent-blue);
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: rgba(45,80,22,0.04);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--green-dark);
     font-size: 13px;
+    color: var(--text);
   }
   .next-action .label {
+    font-family: 'Sora', sans-serif;
     font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--accent-blue);
-    font-weight: 600;
-    margin-bottom: 4px;
+    letter-spacing: 0.6px;
+    color: var(--green-dark);
+    font-weight: 700;
+    margin-bottom: 6px;
   }
 
   .blocker {
     margin-top: 12px;
-    padding: 12px;
-    background: rgba(239,68,68,0.08);
-    border-radius: 8px;
-    border-left: 3px solid var(--accent-red);
+    padding: 14px 16px;
+    background: rgba(184,134,11,0.06);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--gold);
     font-size: 13px;
+    color: var(--text);
   }
   .blocker .label {
     font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--accent-red);
-    font-weight: 600;
-    margin-bottom: 4px;
+    letter-spacing: 0.6px;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 6px;
   }
 
   /* WEEKLY PLAN TABLE */
   .week-section {
-    background: var(--card);
+    background: var(--white);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 16px;
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
   }
   .week-section h3 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 18px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    letter-spacing: -0.3px;
   }
   .week-section h3 .dot {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     display: inline-block;
+    box-shadow: 0 0 0 2px rgba(45,80,22,0.10);
   }
 
   table {
@@ -242,21 +379,27 @@
     border-collapse: collapse;
   }
   th {
+    font-family: 'Sora', sans-serif;
     text-align: left;
     font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
     color: var(--text-dim);
-    padding: 8px 12px;
+    padding: 10px 14px;
     border-bottom: 1px solid var(--border);
+    font-weight: 600;
   }
   td {
-    padding: 10px 12px;
+    font-family: 'Sora', sans-serif;
+    padding: 12px 14px;
     font-size: 13px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text);
+    border-bottom: 1px solid rgba(45,80,22,0.05);
     vertical-align: top;
+    line-height: 1.6;
   }
   tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(45,80,22,0.02); }
 
   .status-dot {
     width: 8px;
@@ -264,11 +407,12 @@
     border-radius: 50%;
     display: inline-block;
     margin-right: 6px;
+    box-shadow: 0 0 0 1.5px rgba(45,80,22,0.15);
   }
-  .status-done { background: var(--accent-green); }
-  .status-progress { background: var(--accent-blue); }
+  .status-done { background: var(--green-dark); }
+  .status-progress { background: var(--green-mid); }
   .status-pending { background: var(--text-dim); }
-  .status-waiting { background: var(--accent-orange); }
+  .status-waiting { background: var(--gold); }
 
   /* ACTION ITEMS */
   .action-list {
@@ -277,91 +421,233 @@
   .action-item {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    padding: 14px 16px;
-    background: var(--card);
+    gap: 14px;
+    padding: 16px 18px;
+    background: var(--white);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    margin-bottom: 8px;
+    border-radius: var(--radius);
+    margin-bottom: 10px;
     font-size: 13px;
-    transition: border-color 0.2s;
+    transition: all 0.25s;
+    box-shadow: var(--shadow);
+    color: var(--text);
+    line-height: 1.6;
   }
-  .action-item:hover { border-color: rgba(255,255,255,0.15); }
+  .action-item:hover {
+    border-color: var(--border-strong);
+    transform: translateX(2px);
+    box-shadow: var(--shadow-lg);
+  }
   .action-item .project-tag {
+    font-family: 'Sora', sans-serif;
     font-size: 10px;
-    padding: 3px 8px;
+    padding: 4px 10px;
     border-radius: 4px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     white-space: nowrap;
     flex-shrink: 0;
+    letter-spacing: 0.4px;
   }
-  .tag-farmnara { background: rgba(34,197,94,0.15); color: var(--accent-green); }
-  .tag-tradebot { background: rgba(168,85,247,0.15); color: var(--accent-purple); }
-  .tag-webdesign { background: rgba(249,115,22,0.15); color: var(--accent-orange); }
-  .tag-bergama { background: rgba(59,130,246,0.15); color: var(--accent-blue); }
-  /* BridgeGate projesi kaldırıldı (17.04.2026) */
-  .tag-studybird { background: rgba(20,184,166,0.15); color: var(--accent-teal); }
-  .tag-sport { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+  .tag-farmnara { background: rgba(45,80,22,0.10); color: var(--green-dark); }
+  /* Yan proje tag'leri arşiv referansı için tutuldu (29.04.2026) */
+  .tag-tradebot { background: rgba(107,76,138,0.10); color: var(--accent-purple); }
+  .tag-webdesign { background: rgba(184,134,11,0.10); color: var(--gold); }
+  .tag-bergama { background: rgba(74,124,40,0.10); color: var(--green-mid); }
+  .tag-studybird { background: rgba(107,155,58,0.10); color: var(--green-light); }
+
+  /* FarmNara kanal etiketleri (29.04.2026) — v2 paletinde */
+  .channel-tag {
+    display: inline-block;
+    font-family: 'Sora', sans-serif;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(45,80,22,0.10);
+    color: var(--green-dark);
+    border: 1px solid rgba(45,80,22,0.18);
+    white-space: nowrap;
+  }
+
+  .channel-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    border-top: 3px solid var(--green-dark);
+    transition: all 0.3s;
+    box-shadow: var(--shadow);
+  }
+  .channel-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+  }
+  .channel-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: var(--green-dark);
+    letter-spacing: -0.2px;
+  }
+  .channel-card .channel-sub {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 13px;
+    color: var(--gold);
+    font-style: italic;
+    margin-bottom: 14px;
+  }
+  .channel-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .channel-card ul li {
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(45,80,22,0.05);
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .channel-card ul li:last-child { border-bottom: none; }
+  .channel-card ul li .ch-deadline {
+    color: var(--gold);
+    font-size: 11px;
+    margin-left: 6px;
+    font-weight: 600;
+  }
+  .channel-card ul li .ch-done {
+    color: var(--green-mid);
+    font-size: 11px;
+    margin-left: 6px;
+  }
+
+  /* Arşiv listesi (sade, küçük) */
+  .archive-block {
+    background: var(--cream-dark);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-top: 24px;
+    opacity: 0.95;
+  }
+  .archive-block h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--green-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .archive-block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .archive-block ul li {
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    padding: 6px 12px;
+    background: var(--white);
+    border-radius: 6px;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+  .archive-block ul li code {
+    background: transparent;
+    color: var(--text-dim);
+    font-size: 10px;
+    padding: 0;
+  }
 
   .action-item .deadline {
+    font-family: 'Sora', sans-serif;
     margin-left: auto;
     color: var(--text-dim);
     font-size: 12px;
     white-space: nowrap;
     flex-shrink: 0;
+    font-weight: 500;
   }
-  .action-item .deadline.soon { color: var(--accent-orange); }
-  .action-item .deadline.overdue { color: var(--accent-red); }
+  .action-item .deadline.soon { color: var(--gold); font-weight: 600; }
+  .action-item .deadline.overdue { color: var(--accent-red); font-weight: 600; }
 
   /* INSIGHTS */
   .insight-card {
-    background: var(--card);
+    background: var(--white);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 16px;
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
   }
   .insight-card h3 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 12px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
   }
   .insight-card p, .insight-card li {
-    font-size: 13px;
-    color: var(--text-dim);
-    margin-bottom: 8px;
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.7;
   }
-  .insight-card li { margin-left: 16px; }
-  .insight-card li strong { color: var(--text); }
+  .insight-card li { margin-left: 20px; }
+  .insight-card li strong { color: var(--green-dark); font-weight: 600; }
+  .insight-card li em { color: var(--gold); font-style: italic; }
 
   /* TIMELINE */
   .timeline-container {
-    background: var(--card);
+    background: var(--white);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 16px;
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
+  }
+  .timeline-container h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 20px;
+    letter-spacing: -0.3px;
   }
   .timeline-item {
     display: flex;
-    gap: 16px;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(45,80,22,0.06);
   }
   .timeline-item:last-child { border-bottom: none; }
   .timeline-date {
-    font-size: 12px;
-    color: var(--text-dim);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 14px;
+    color: var(--gold);
     width: 80px;
     flex-shrink: 0;
-    font-weight: 500;
+    font-weight: 700;
+    font-style: italic;
   }
   .timeline-content {
+    font-family: 'Sora', sans-serif;
     font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
   }
   .timeline-content strong {
-    color: #fff;
+    color: var(--green-dark);
+    font-weight: 600;
   }
 
   /* RESPONSIVE */
@@ -370,27 +656,27 @@
   }
 
   @media (max-width: 768px) {
-    body { padding: 12px; font-size: 14px; }
-    .header { flex-direction: column; gap: 12px; }
-    .header h1 { font-size: 22px; }
+    body { padding: 16px 12px 32px; font-size: 14px; }
+    .header { flex-direction: column; gap: 16px; padding-bottom: 20px; }
+    .header h1 { font-size: 24px; }
     .quick-stats { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .stat-pill { min-width: unset; padding: 10px 12px; }
-    .stat-pill .number { font-size: 20px; }
+    .stat-pill { min-width: unset; padding: 12px 14px; }
+    .stat-pill .number { font-size: 18px; }
     .stat-pill .label { font-size: 10px; }
 
-    .tabs { gap: 2px; padding: 3px; -webkit-overflow-scrolling: touch; }
-    .tab { padding: 8px 14px; font-size: 13px; }
+    .tabs { gap: 2px; padding: 4px; -webkit-overflow-scrolling: touch; }
+    .tab { padding: 9px 14px; font-size: 12px; }
 
-    .project-card { padding: 16px; }
-    .project-card .card-header h3 { font-size: 16px; }
+    .project-card { padding: 18px; }
+    .project-card .card-header h3 { font-size: 18px; }
 
-    .week-section { padding: 16px; overflow-x: auto; }
+    .week-section { padding: 18px; overflow-x: auto; }
     table { min-width: 500px; }
 
     .action-item {
       flex-wrap: wrap;
-      gap: 8px;
-      padding: 12px;
+      gap: 10px;
+      padding: 14px;
     }
     .action-item .deadline {
       margin-left: 0;
@@ -398,24 +684,26 @@
       text-align: right;
     }
 
-    .timeline-item { flex-direction: column; gap: 4px; }
-    .timeline-date { width: auto; font-weight: 600; }
+    .timeline-item { flex-direction: column; gap: 6px; }
+    .timeline-date { width: auto; }
 
-    .insight-card { padding: 16px; }
+    .insight-card { padding: 18px; }
+    .insight-card h3 { font-size: 18px; }
   }
 
   @media (max-width: 400px) {
-    body { padding: 8px; }
+    body { padding: 12px 8px 24px; }
     .header h1 { font-size: 20px; }
     .quick-stats { grid-template-columns: 1fr 1fr; }
-    .tab { padding: 7px 10px; font-size: 12px; }
+    .tab { padding: 8px 10px; font-size: 11px; }
     .card-detail { font-size: 12px; }
   }
 
   /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--cream-dark); }
+  ::-webkit-scrollbar-thumb { background: rgba(45,80,22,0.20); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(45,80,22,0.40); }
 </style>
 </head>
 <body>
@@ -423,25 +711,25 @@
 <!-- HEADER -->
 <div class="header">
   <div>
-    <h1>Can — Dashboard</h1>
-    <div class="subtitle">Son güncelleme: 22.04.2026 (TEK ODAK kararı · 5 yan proje askıya alındı · FarmNara solo · Cuma sabah Mali Müşavir görüşmesi · şirket kurulumu + lojistik + restoran görüşmeleri ana öncelik) | Hafta: 20 – 26 Nisan 2026 (Pzt-Pzr)</div>
+    <h1>Can — <em>FarmNara</em> Dashboard</h1>
+    <div class="subtitle">Son güncelleme: 28.04.2026 · 5 kanallı görev yapısı (Şirket Kurulumu · Üretici/Operasyon · Restoran/Satış · Qapera · ArGe) · Tüm yan projeler arşivlendi (Bergama dahil) | Hafta: 27 Nisan – 3 Mayıs 2026 (Pzt-Pzr)</div>
   </div>
   <div class="quick-stats">
     <div class="stat-pill">
-      <span class="number" style="color:var(--accent-green)">1</span>
-      <span class="label">Aktif Proje</span>
+      <span class="number" style="color:var(--accent-green)">FarmNara</span>
+      <span class="label">Tek Aktif Proje</span>
     </div>
     <div class="stat-pill">
-      <span class="number" style="color:var(--text-dim)">5</span>
-      <span class="label">Askıda</span>
+      <span class="number" style="color:var(--accent-green)">5</span>
+      <span class="label">Görev Kanalı</span>
     </div>
     <div class="stat-pill">
-      <span class="number" style="color:var(--accent-orange)">3</span>
-      <span class="label">Bu Haftanın Ana Öncelikleri</span>
+      <span class="number" style="color:var(--accent-orange)">21</span>
+      <span class="label">Açık Aksiyon</span>
     </div>
     <div class="stat-pill">
-      <span class="number" style="color:var(--accent-red)">Cuma</span>
-      <span class="label">Mali Müşavir</span>
+      <span class="number" style="color:var(--accent-red)">Salı 05.05</span>
+      <span class="label">Akhisar — Orhanoğlu</span>
     </div>
   </div>
 </div>
@@ -456,200 +744,118 @@
   <button class="tab" onclick="showTab('insights')">Notlar & Fırsatlar</button>
 </div>
 
-<!-- TAB 1: PROJELER -->
+<!-- TAB 1: PROJELER (FarmNara odaklı, 5 kanal yapısı) -->
 <div id="projects" class="tab-content active">
+
+  <!-- FARMNARA — ÜST-BİLGİ KARTI (full-width) -->
+  <div class="project-card" style="border-top: 3px solid var(--accent-green);">
+    <div class="card-header">
+      <h3>FarmNara</h3>
+      <span class="badge urgent">TEK ODAK · OPERASYON FAZI</span>
+    </div>
+    <div class="card-detail">KUICK Creation 2026 — Tarım tedarik zinciri şeffaflık platformu · Markup modeli · Limited Şirket kuruluş haftası</div>
+    <div class="card-detail"><strong>Canlı Site:</strong> <a href="https://farmnara.com" target="_blank" style="color:var(--accent-green);">farmnara.com</a> · <strong>Mail:</strong> <code>can@farmnara.com</code> · <strong>Framework:</strong> Disciplined Entrepreneurship (DE 14/24)</div>
+    <div class="card-detail" style="background:rgba(45,80,22,0.10); padding:10px; border-radius:6px; margin-top:10px; border-left:3px solid var(--accent-green);">&#9733; <strong>28.04.2026 Operasyon Pivot:</strong> LTD kararı kesinleşti (24.04 mali müşavir) — kuruluş bu hafta kapanıyor. <strong>İş modeli komisyon → markup'a çevrildi.</strong> Fabrika partneri: <strong>Orhanoğlu (Aydın)</strong> · Okan Mordal üzerinden. Salı 05.05 Akhisar ziyareti = ilk operasyon oturumu.</div>
+    <div class="progress-bar">
+      <div class="fill" style="width:82%; background: linear-gradient(90deg, var(--accent-green), #4ade80);"></div>
+    </div>
+    <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~82% (DE 14/24 + Website + Şirket pivot + Operasyon başlangıcı yaklaşıyor)</div>
+    <div class="card-detail" style="margin-top:12px; font-size:12px; color:var(--text-dim);">İşler artık 5 görev kanalına ayrıldı. Aşağıdaki kanal kartları açık aksiyonların özetidir — tam liste <strong>Aksiyonlar</strong> tab'ında.</div>
+  </div>
+
+  <!-- 5 KANAL — Görev Dağılımı -->
+  <h3 style="margin: 32px 0 16px 0; font-size: 22px; color: var(--green-dark); font-weight: 700; letter-spacing: -0.3px;">Görev Kanalları</h3>
   <div class="projects-grid">
 
-    <!-- FARMNARA — TEK ODAK -->
-    <div class="project-card" style="border-top: 3px solid var(--accent-green);">
-      <div class="card-header">
-        <h3>FarmNara</h3>
-        <span class="badge urgent">TEK ODAK</span>
-      </div>
-      <div class="card-detail">KUICK Creation 2026 — Tarım tedarik zinciri şeffaflık platformu</div>
-      <div class="card-detail"><strong>Framework:</strong> Disciplined Entrepreneurship</div>
-      <div class="card-detail" style="background:rgba(239,68,68,0.08); padding:8px; border-radius:6px; margin-top:6px; border-left:3px solid var(--accent-red);">&#9733; <strong>22.04.2026 Karar:</strong> Yan projeler (CopyBot v2, Web Design, Bergama, StudyBird, Daily Dispatch, Nothing Ever Happens) askıya alındı. FarmNara solo. Ana gündem: şirket kurulumu, lojistik çözümleri, restoran görüşmeleri.</div>
-      <div class="card-detail" style="margin-top:8px;"><strong>Aşama:</strong> DE Steps 0-14 ✓, Website v1 + v2 FrontEnd 4/4 ✓, Orbit v2 ✓, Saha ziyareti + raporu ✓, Mentör raporu ✓, PMR şablonu ✓, DE Canvas ✓, Restoran Listesi v1 ✓ (30 İst. + 20 Ege — Michelin + G&amp;M 2026) → <strong style="color:var(--accent-red);">yeni faz: şirket kurulumu + lojistik + restoran outreach</strong></div>
-      <div class="card-detail"><strong>Canlı URL:</strong> <a href="https://farmnarav-1.netlify.app/" target="_blank" style="color:var(--accent-green);">farmnarav-1.netlify.app</a> (v1) — v2 Netlify URL'i Can'dan gelecek</div>
-      <div class="progress-bar">
-        <div class="fill" style="width:78%; background: linear-gradient(90deg, var(--accent-green), #4ade80);"></div>
-      </div>
-      <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~78% (DE 14/24 + Website v1+v2 + Restoran Listesi v1 + operasyon fazına geçiş)</div>
-
-      <div class="card-detail" style="margin-top:12px;"><strong>Bu haftanın 3 ana önceliği (22.04 kararı):</strong></div>
-      <div class="card-detail">&#9679; <strong>1. Şirket kurulumu:</strong> Cuma 24.04 sabah Mali Müşavir görüşmesi — şahıs/limited seçimi, vergi dairesi, e-imza, NACE kodları, KOSGEB uygunluk</div>
-      <div class="card-detail">&#9679; <strong>2. Lojistik çözümleri:</strong> Soğuk zincir modeli, teslimat maliyeti, minimum sipariş miktarı, Akhisar→İstanbul akış — Volkan/Okan ağı + İstanbul kurye tarafı</div>
-      <div class="card-detail">&#9679; <strong>3. Restoran görüşmeleri başlıyor:</strong> Pioneer 11 önceliklendirildi — iletişim verisi çıkar, mesajlaşma/arama başlat, ilk 3-5 keşif toplantısı</div>
-
-      <div class="card-detail" style="margin-top:12px;"><strong>Haftanın takvimi (20-26 Nisan):</strong></div>
-      <div class="card-detail">&#9679; Çar 22.04: <strong>Mentör 1-1 15:00</strong> — şirket kurulumu + lojistik + restoran outreach danışması</div>
-      <div class="card-detail">&#9679; Per 23.04: Lojistik araştırma + restoran iletişim verisi + mali müşavir gündem hazırlığı</div>
-      <div class="card-detail">&#9679; Cuma 24.04: <strong>Sabah Mali Müşavir · 14:00 KUICK weekly · 16:00 Qapera görüşmesi</strong></div>
-      <div class="card-detail">&#9679; Cmt 25.04: İlk restoran çağrıları + lojistik teklif karşılaştırma</div>
-      <div class="card-detail">&#9679; Pzr 26.04: Haftalık review + sonraki hafta planı</div>
-
-      <div class="card-detail" style="margin-top:12px;"><strong>Tamamlanan çıktılar (DE paketi 21.04.2026):</strong></div>
-      <div class="card-detail">&#10003; DE Steps 0-14 (15 dosya, de-steps/ klasörü, mentör-hazır — 4-6 sayfa/adım)</div>
-      <div class="card-detail">&#10003; TAM 56M ₺/yıl komisyon, 115 restoran hedefi (%25 pay), persona "Deniz Arslan"</div>
-      <div class="card-detail">&#10003; Hibrit business model (komisyon %18 + Pro 1.500 ₺/ay + VAS), Yıl 3 30M ₺, LTV/COCA 23x</div>
-      <div class="card-detail">&#10003; Restoran Listesi v1 — 30 İst. + 20 Ege, Pioneer 11 önceliklendirildi</div>
-      <div class="card-detail">&#10003; Mentör 1-1 hazırlık raporu (13 sayfa PDF) — KOSGEB/şirket kurulum + TÜBİTAK/lojistik araştırması kenar notları</div>
-
-      <div class="next-action">
-        <div class="label">Sonraki Adımlar</div>
-        <strong>Cuma sabah Mali Müşavir</strong> · Mentör 1-1 (Çar 15:00) · KUICK + Qapera (Cuma 14:00/16:00) · Lojistik teklif karşılaştırma · Restoran Pioneer 11 iletişim verisi + ilk çağrılar · DE 15-16 (varsayım testi — fırsat olursa) · Astro + Supabase migrate (geri planda)
-      </div>
+    <!-- KANAL 1: ŞİRKET KURULUMU -->
+    <div class="channel-card">
+      <span class="channel-tag">Kanal 1 · Şirket Kurulumu</span>
+      <h4 style="margin-top:10px;">Yasal & Mali Altyapı</h4>
+      <div class="channel-sub">LTD tescili, vergi, İyzico/KDV, sözleşme</div>
+      <ul>
+        <li><strong>LTD kapanışı</strong> — vergi dairesi, NACE kodları, e-imza, banka hesabı <span class="ch-deadline">Bu hafta</span></li>
+        <li><strong>Mali Müşavir 2. görüşme</strong> — açık konular bohçası (TBD; mali müşavirden dönüşe göre hafta içi) <span class="ch-deadline">Hafta içi · TBD</span></li>
+        <li>İyzico mekaniği — tek hesap mı / pazaryeri mi <span class="ch-deadline">Bu hafta</span></li>
+        <li>KDV oran çiftleşmesi (fabrika→FarmNara→restoran) <span class="ch-deadline">Bu hafta</span></li>
+        <li>Ambalaj muhasebe yeri + stok/iade/hasar sözleşme maddeleri <span class="ch-deadline">Bu hafta</span></li>
+      </ul>
     </div>
 
-    <!-- İHRACAT/İTHALAT FİZİBİLİTE — FarmNara alt araştırma, pasif -->
-    <div class="project-card" style="border-top: 3px solid var(--accent-green); border-left: 2px dashed var(--accent-green); opacity:0.7;">
-      <div class="card-header">
-        <h3>İhracat/İthalat Fizibilite</h3>
-        <span class="badge" style="background:rgba(34,197,94,0.12); color:var(--accent-green);">FarmNara alt araştırma — Pasif</span>
-      </div>
-      <div class="card-detail">FarmNara ekosistemi — Tarım & gıda ihracat/ithalat fırsat analizi</div>
-      <div class="card-detail"><strong>Kapsam:</strong> İhracat + İthalat, tüm ürün grupları &amp; pazarlar karşılaştırmalı</div>
-      <div class="card-detail"><strong>Aşama:</strong> v1 rapor tamamlandı ✓ — Faz 0 ertelendi (22.04 kararı: FarmNara ana faaliyet + şirket kurulum + lojistik + restoran önde)</div>
-      <div class="progress-bar">
-        <div class="fill" style="width:15%; background: linear-gradient(90deg, var(--accent-green), #86efac);"></div>
-      </div>
-      <div class="card-detail" style="text-align:right; font-size:12px;">İlerleme: ~15% — Pasif (KOSGEB/IPARD takvimi geldiğinde tekrar aktif)</div>
-
-      <div class="card-detail" style="margin-top:12px;"><strong>Hazır varlıklar (v1 raporda):</strong></div>
-      <div class="card-detail">&#9679; Zeytin/zeytinyağı → Körfez (BAE) senaryosu, saha verisi</div>
-      <div class="card-detail">&#9679; Çam balı → AB (Almanya), dünya %90-92 TR</div>
-      <div class="card-detail">&#9679; Kahve kavurma → ABD/Körfez, %30-40 katma değer</div>
-
-      <div class="next-action" style="border-left-color: var(--text-dim); background:rgba(139,141,151,0.08);">
-        <div class="label" style="color: var(--text-dim);">⏸ Pasif — FarmNara ana faaliyet oturduktan sonra tekrar aç</div>
-        KOSGEB/IPARD takvimi öğrenilecek (referans için). Aktif çalışma şimdilik durdu.
-      </div>
+    <!-- KANAL 2: ÜRETİCİ / OPERASYON -->
+    <div class="channel-card">
+      <span class="channel-tag">Kanal 2 · Üretici / Operasyon</span>
+      <h4 style="margin-top:10px;">Arz Tarafı — Orhanoğlu / Okan Ekseni</h4>
+      <div class="channel-sub">Akhisar ziyareti, lojistik, fiyat listesi</div>
+      <ul>
+        <li><strong>Hikaye-veri akışı oturumu</strong> — Okan + Orhanoğlu ekibi <span class="ch-deadline">30.04.2026</span></li>
+        <li><strong>Lojistik teklif toplama</strong> — Aydın → İstanbul kuru kargo + soğuk zincir <span class="ch-deadline">02.05.2026</span></li>
+        <li><strong>Akhisar ziyareti hazırlığı</strong> — gündem, ürün spesi, ambalaj akışı, irsaliye/fatura prosedürü <span class="ch-deadline">Salı 05.05</span></li>
+        <li>Markup fiyat listesi (zeytin sofralık) — alış + ambalaj + lojistik + marj <span class="ch-deadline">05.05 sonrası</span></li>
+      </ul>
     </div>
 
-    <!-- COPYBOT v2 — ASKIDA -->
-    <div class="project-card" style="border-top: 3px solid var(--accent-purple); opacity:0.55;">
-      <div class="card-header">
-        <h3>CopyBot v2</h3>
-        <span class="badge paused">⏸ Askıda (22.04)</span>
-      </div>
-      <div class="card-detail">Polymarket copytrade botu — v1'den 18 bug dersiyle sıfırdan inşa</div>
-      <div class="card-detail"><strong>Stack:</strong> Python 3 + Flask (Blueprint) + WebSocket</div>
-      <div class="card-detail"><strong>Aşama:</strong> Faz 0 ✅ + Faz 1 ✅ + Faz 2 ✅ TAMAMLANDI — Faz 3 sırada</div>
-      <div class="progress-bar">
-        <div class="fill" style="width:45%; background: linear-gradient(90deg, var(--accent-purple), #c084fc);"></div>
-      </div>
-      <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~45% (Faz 0+1+2 tamamlandı / 6 Faz)</div>
-
-      <div class="card-detail" style="margin-top:12px;"><strong>Faz 2 Sonuçları (13.04.2026):</strong></div>
-      <div class="card-detail">&#9679; 5 yeni modül: scan_config, watchlist (240 satır), daily_scanner (230 satır), scheduler (130 satır), run_panel</div>
-      <div class="card-detail">&#9679; DB: 3 yeni tablo (scan_history, scan_trader_scores, watchlist) + 5 index = toplam 10 tablo</div>
-      <div class="card-detail">&#9679; Panel: 4 yeni sayfa (tarama geçmişi, detay, watchlist CRUD, scheduler) + 9 API endpoint</div>
-      <div class="card-detail">&#9679; APScheduler ile günlük 06:00 UTC otomatik tarama, watchlist auto-pause</div>
-      <div class="card-detail">&#9679; Canlı test: 147 trader tarandı, 78 eşik geçti (50+), en yüksek skor 98.82</div>
-      <div class="card-detail">&#9679; Testler: 44/44 passed (Faz 1: 12 + Faz 2: 32), VPS lokale senkronize edildi</div>
-
-      <div class="card-detail" style="margin-top:12px;"><strong>Son Çalışmalar (13.04.2026):</strong></div>
-      <div class="card-detail">&#9679; VPS altyapı düzeltme + systemd service (otomatik başlangıç)</div>
-      <div class="card-detail">&#9679; Canlı tarama ilerleme göstergesi (BUG-3 çözümü)</div>
-      <div class="card-detail">&#9679; 58/58 test passed (VPS + lokal senkronizasyon)</div>
-
-      <div class="card-detail" style="margin-top:12px;"><strong>V2 Baseline (19.04.2026):</strong></div>
-      <div class="card-detail">&#9679; CopyBot v2 Polymarket V2 üstüne kuruldu — V1 bizim için yok</div>
-      <div class="card-detail">&#9679; requirements.txt: py-clob-client-v2&gt;=1.0.0 + web3&gt;=7.0.0</div>
-      <div class="card-detail">&#9679; config.py: 7 yeni pUSD/CPMA/onramp alanı eklendi (standart V2 config)</div>
-      <div class="card-detail">&#9679; v2-migration-plan.md: V2 baseline + Faz 4 öncesi operasyonel prosedür</div>
-      <div class="card-detail">&#9679; api-constraints.md + architecture.md V2 syntax + baseline framing</div>
-      <div class="card-detail">&#9679; 58/58 test hala passed (migration kodu bozmadı)</div>
-      <div class="card-detail">&#9679; Nehbot deneyiminden: Polymarket proxy CPMA (Gnosis Safe değil), Factory-owned, CallType 0=INVALID/1=CALL</div>
-
-      <div class="next-action" style="border-left-color: var(--text-dim); background:rgba(139,141,151,0.08);">
-        <div class="label" style="color: var(--text-dim);">⏸ ASKIDA (22.04.2026 kararı)</div>
-        FarmNara tek odak olana kadar CopyBot v2 dokunulmayacak. Faz 3 devralma noktası belgelendi: <code>Projects/CopyBot-v2/docs/faz3-next-session.md</code>. 58/58 test passed, V2 baseline hazır, Faz 3 için hazır durumda bekliyor.
-      </div>
-      <div class="next-action" style="margin-top:8px; opacity:0.7;">
-        <div class="label">Faz 4 öncesi (tek seferlik, askı sonrası)</div>
-        USDC.e → pUSD wrap ($50), production venv upgrade (`pip install py-clob-client-v2`), pUSD allowance setup, smoke test.
-      </div>
+    <!-- KANAL 3: RESTORAN / SATIŞ -->
+    <div class="channel-card">
+      <span class="channel-tag">Kanal 3 · Restoran / Satış</span>
+      <h4 style="margin-top:10px;">Talep Tarafı — Direkt Outreach</h4>
+      <div class="channel-sub">Pioneer 11, keşif görüşmeleri, konsiyerj test</div>
+      <ul>
+        <li><strong>Pioneer 11 outreach mesajı v1</strong> — chef-owner uyumlu, hikaye unsurlu taslak <span class="ch-deadline">Bu hafta</span></li>
+        <li>Restoran Listesi v1.1 — iletişim verisi (email + WhatsApp), kapasite doğrulama <span class="ch-deadline">Nisan sonu</span></li>
+        <li>İlk 3-5 chef/chef-owner ile keşif görüşmesi <span class="ch-deadline">Mayıs ilk hafta</span></li>
+        <li>Konsiyerj test gündemi (haftada 1 teslimat senaryosu) <span class="ch-deadline">Mayıs</span></li>
+      </ul>
     </div>
 
-    <!-- BERGAMA FUTBOL — ASKIDA -->
-    <div class="project-card" style="border-top: 3px solid var(--accent-blue); opacity:0.55;">
-      <div class="card-header">
-        <h3>Bergama Futbol</h3>
-        <span class="badge paused">⏸ Askıda (22.04)</span>
-      </div>
-      <div class="card-detail">Bergama Belediyesi futbol altyapı projesi danışmanlığı</div>
-      <div class="card-detail"><strong>Kapsam:</strong> A Takım + Akademi (U13-U19) + Futbol Okulları (6-12 yaş)</div>
-      <div class="card-detail"><strong>Aşama:</strong> Sunum yapıldı, belediye geri bildirimi bekleniyor — FarmNara odağı bitene kadar pasif</div>
-      <div class="progress-bar">
-        <div class="fill" style="width:75%; background: linear-gradient(90deg, var(--accent-blue), #60a5fa);"></div>
-      </div>
-      <div class="card-detail" style="text-align:right; font-size:12px;">Sunum Tamamlandı: 75% — ASKIDA</div>
-
-      <div class="card-detail" style="margin-top:12px;"><strong>Tamamlanan çıktılar:</strong></div>
-      <div class="card-detail">&#10003; PPTX sunum (20 slayt — final, dil kontrolünden geçti)</div>
-      <div class="card-detail">&#10003; PDF sunum (A4 dikey — 17 sayfa, reportlab, tüm QA'den geçti)</div>
-      <div class="card-detail">&#10003; Koordinatör görüşme dokümanı (DOCX)</div>
-      <div class="card-detail">&#10003; Organizasyon şeması (PPTX + PDF içinde)</div>
-
-      <div class="next-action" style="border-left-color: var(--text-dim); background:rgba(139,141,151,0.08);">
-        <div class="label" style="color: var(--text-dim);">⏸ ASKIDA — belediye cevabı gelirse tekrar değerlendir</div>
-        Veri gelirse acil değilse bekletilecek. Acil talep gelirse istisna olarak reaktif yanıt verilecek.
-      </div>
+    <!-- KANAL 4: QAPERA / ENTEGRASYON -->
+    <div class="channel-card">
+      <span class="channel-tag">Kanal 4 · Qapera / Entegrasyon</span>
+      <h4 style="margin-top:10px;">Talep Tarafı — Platform Üzerinden</h4>
+      <div class="channel-sub">Tedarikçi paneli, API, fiyat senkron</div>
+      <ul>
+        <li>Tedarikçi paneli wireframe + API entegrasyon spesi <span class="ch-deadline">10.05.2026</span></li>
+        <li>Çağlar Bey 2. teknik görüşme — API detayları <span class="ch-deadline">15.05.2026</span></li>
+        <li>Fiyat listesi senkron mekaniği (FarmNara → Qapera) <span class="ch-deadline">Mayıs sonu</span></li>
+      </ul>
     </div>
 
-    <!-- STUDYBIRD — ASKIDA -->
-    <div class="project-card" style="border-top: 3px solid var(--accent-teal); opacity:0.55;">
-      <div class="card-header">
-        <h3>StudyBird</h3>
-        <span class="badge paused">⏸ Askıda (22.04)</span>
-      </div>
-      <div class="card-detail">Flappy Bird tarzı quiz oyunu — öğrenme projesi</div>
-      <div class="card-detail"><strong>Motor:</strong> Godot Engine 4.x (React Native'den geçiş)</div>
-      <div class="card-detail"><strong>Aşama:</strong> Pre-development — FarmNara odağı bitene kadar Godot kurulumu ertelendi</div>
-      <div class="progress-bar">
-        <div class="fill" style="width:10%; background: linear-gradient(90deg, var(--accent-teal), #5eead4);"></div>
-      </div>
-      <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~10% — ASKIDA</div>
-
-      <div class="next-action" style="border-left-color: var(--text-dim); background:rgba(139,141,151,0.08);">
-        <div class="label" style="color: var(--text-dim);">⏸ ASKIDA — FarmNara bitene kadar dokunulmayacak</div>
-        Godot + Game Studios kurulumu askıda. Solo-FarmNara dönemi kapandıktan sonra tekrar planlanacak.
-      </div>
-    </div>
-
-    <!-- WEB DESIGN — ASKIDA -->
-    <div class="project-card" style="border-top: 3px solid var(--accent-orange); opacity:0.55;">
-      <div class="card-header">
-        <h3>Web Design</h3>
-        <span class="badge paused">⏸ Askıda (22.04)</span>
-      </div>
-      <div class="card-detail">AI destekli freelance web tasarım — Türkiye KOBİ'lerine outbound cold email ile kişiselleştirilmiş demo modeli</div>
-      <div class="card-detail"><strong>Stack:</strong> Claude Design (claude.ai/design) + Framer Pro + Lovable Pro</div>
-      <div class="card-detail"><strong>Aşama:</strong> Fizibilite ✓, 5 niş ✓, 3 design system ✓, 6 demo ✓, outreach paketi ✓ — FarmNara odağı bitene kadar altyapı kurulumu ertelendi</div>
-      <div class="progress-bar">
-        <div class="fill" style="width:50%; background: linear-gradient(90deg, var(--accent-orange), #fb923c);"></div>
-      </div>
-      <div class="card-detail" style="text-align:right; font-size:12px;">Genel İlerleme: ~50% — ASKIDA</div>
-
-      <div class="card-detail" style="margin-top:12px;"><strong>Hazır duran varlıklar (dondu):</strong></div>
-      <div class="card-detail">&#10003; 3 Design System: Sober Practice, Coastal Boutique Minimal, Heritage Producer</div>
-      <div class="card-detail">&#10003; 6 demo: Or, Karsaz, Sultan Konak, Alâ Otel Mardin, Köklü Zeytincilik, Yıldız Fıstıkcılık</div>
-      <div class="card-detail">&#10003; Outreach paketi: 15 email şablonu + 60-90 sn Loom scripti + 4 aşamalı follow-up sekansı</div>
-
-      <div class="next-action" style="border-left-color: var(--text-dim); background:rgba(139,141,151,0.08);">
-        <div class="label" style="color: var(--text-dim);">⏸ ASKIDA (22.04.2026) — FarmNara tek odak</div>
-        Ajan iskelet, şahıs şirketi kurulumu (Web Design için), outreach altyapısı (domain/SPF/İYS) ertelendi. Not: FarmNara'nın kendi şirket kurulumu Cuma sabah Mali Müşavir görüşmesinde ele alınacak — Web Design'ın freelance şirket ihtiyacı bununla çakışmıyor, ayrı karar.
-      </div>
+    <!-- KANAL 5: ARGE / STRATEJİ -->
+    <div class="channel-card">
+      <span class="channel-tag">Kanal 5 · ArGe / Strateji</span>
+      <h4 style="margin-top:10px;">Uzun Vadeli — Geri Planda</h4>
+      <div class="channel-sub">DE adımları, fon formülü, teknik araştırma</div>
+      <ul>
+        <li>DE Step 15-16 — Key Assumptions + Test Protokolü <span class="ch-deadline">Fırsat olursa</span></li>
+        <li>Üretici Destek Fonu formülü — markup üzerinden % oran (pilot sonrası) <span class="ch-deadline">Pilot sonrası</span></li>
+        <li>Astro + Supabase migrate planı (v2 HTML → component) <span class="ch-deadline">Önümüzdeki hafta</span></li>
+        <li>Escrow modeli markup'a göre güncelleme (26.04 raporu komisyon-zeminliydi) <span class="ch-deadline">Mayıs</span></li>
+      </ul>
     </div>
 
   </div>
+
+  <!-- ARŞİV BLOK — Sade liste -->
+  <div class="archive-block">
+    <h4>Arşivlenmiş Projeler (29.04.2026 kararı)</h4>
+    <p style="font-size:12px; color:var(--text-dim); margin-bottom:10px;">Tüm yan projeler arşive alındı. Brief'ler ve kaynak kod dokunulmadan duruyor; FarmNara operasyonu oturduktan sonra durum yeniden değerlendirilecek. Bergama'da küçük dönüşler reaktif olarak yapılır, dashboard'a yansıtılmaz.</p>
+    <ul>
+      <li><span class="project-tag tag-tradebot" style="font-size:10px; padding:2px 6px;">CopyBot v2</span> Polymarket — Faz 3 devralma: <code>Projects/CopyBot-v2/docs/faz3-next-session.md</code></li>
+      <li><span class="project-tag tag-webdesign" style="font-size:10px; padding:2px 6px;">Web Design</span> 3 design system + 6 demo + outreach paketi dondu</li>
+      <li><span class="project-tag tag-bergama" style="font-size:10px; padding:2px 6px;">Bergama Futbol</span> TFF mevzuat v1.0 teslim, hukuki yorum reaktif</li>
+      <li><span class="project-tag tag-studybird" style="font-size:10px; padding:2px 6px;">StudyBird</span> Godot kurulumu ertelendi</li>
+      <li><span style="background:rgba(163,61,42,0.10); color:var(--accent-red); font-size:10px; padding:2px 6px; border-radius:4px;">Daily Dispatch</span> VPS cron çalışıyor, geliştirme durdu</li>
+      <li><span style="background:rgba(107,76,138,0.10); color:var(--accent-purple); font-size:10px; padding:2px 6px; border-radius:4px;">NothingEverHappens</span> Mimari + VPS notları</li>
+      <li><span style="background:rgba(45,80,22,0.10); color:var(--accent-green); font-size:10px; padding:2px 6px; border-radius:4px;">İhracat/İthalat Fizibilite</span> v1 rapor — KOSGEB/IPARD takvimine kadar pasif</li>
+    </ul>
+  </div>
+
 </div>
 
 <!-- TAB: HAFTALIK PROGRAM -->
 <div id="schedule" class="tab-content">
-  <h3 style="margin-bottom:16px; font-size:16px;">Haftalık Program — 20 – 26 Nisan 2026 (Pzt-Pzr)</h3>
-  <p style="color:var(--text-dim); margin-bottom:16px; font-size:13px;"><strong>22.04 Kararı:</strong> Tüm yan projeler (CopyBot v2, Web Design, Bergama, StudyBird, Daily Dispatch, Nothing Ever Happens) askıya alındı. FarmNara solo. Bu hafta ana gündem: <strong>Cuma sabah Mali Müşavir · lojistik çözümleri · restoran görüşmeleri başlıyor</strong>. Yula (market making) pasif iş — diğer işleri engellemez.</p>
+  <div class="tab-card">
+  <h3 style="margin-bottom:16px;">Haftalık Program — 27 Nisan – 3 Mayıs 2026 (Pzt-Pzr)</h3>
+  <p style="color:var(--text-dim); margin-bottom:16px; font-size:13px;"><strong>29.04 Yapısal Karar:</strong> Tüm yan projeler (CopyBot v2, Web Design, Bergama, StudyBird, Daily Dispatch, NothingEverHappens) arşivlendi — dashboard sadece FarmNara. İşler 5 görev kanalına ayrıldı (Şirket Kurulumu · Üretici/Operasyon · Restoran/Satış · Qapera · ArGe). Spor satırları dashboard'dan kaldırıldı (kişisel takvime taşındı). Bu hafta ana gündem: <strong>LTD kapanışı · Akhisar 05.05 hazırlığı · 30.04 Okan+Orhanoğlu hikaye-veri oturumu · 02.05 lojistik teklif deadline</strong>.</p>
 
   <table>
     <thead>
@@ -657,69 +863,64 @@
         <th>Gün</th>
         <th>Yula Saatleri</th>
         <th>Sabit Etkinlikler</th>
-        <th>Spor</th>
-        <th>Proje Odağı</th>
+        <th>FarmNara Görev Odağı</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><strong>Pazartesi 20.04</strong></td>
+        <td><strong>Pazartesi 28.04</strong> <span style="color:var(--accent-green); font-size:11px;">(bugün öğleden önce)</span></td>
         <td>—</td>
-        <td>—</td>
-        <td><span class="project-tag tag-sport">Bisiklet</span></td>
-        <td><span class="project-tag tag-farmnara">FarmNara</span> DE Steps 7-14 başla + Qapera hazırlık (KAPANDI)</td>
+        <td style="color:var(--text-dim);">Dashboard yeniden yapılandırma · 5 kanal yapısı + arşiv kararı</td>
+        <td><span class="channel-tag">Şirket Kurulumu</span> Mali Müşavir 2. görüşme açık konular bohçası hazırlama (İyzico/KDV/ambalaj/stok) · LTD evrak takibi</td>
       </tr>
       <tr>
-        <td><strong>Salı 21.04</strong></td>
-        <td style="color:var(--accent-orange);">01:00 – 08:00</td>
+        <td><strong>Salı 29.04</strong></td>
         <td>—</td>
-        <td><span class="project-tag tag-sport">Salon mobilite</span></td>
-        <td><span class="project-tag tag-farmnara">FarmNara</span> DE 7-14 TAMAMLANDI + Restoran Listesi v1 (KAPANDI)</td>
+        <td>—</td>
+        <td><span class="channel-tag">Üretici / Operasyon</span> 30.04 hikaye-veri oturumu prep (Çağlar Bey'in lot/üretici/fatura zinciri sorularıyla) · <span class="channel-tag">Restoran / Satış</span> Pioneer 11 outreach mesajı v1 taslak</td>
       </tr>
       <tr>
-        <td><strong>Çarşamba 22.04</strong></td>
-        <td style="color:var(--accent-orange);">17:00 – 01:00</td>
+        <td><strong>Çarşamba 30.04</strong></td>
+        <td style="color:var(--accent-orange);">08:00 – 17:00</td>
         <td style="color:var(--accent-green); font-weight:600;">Mentör 1-1 (15:00)</td>
-        <td><span class="project-tag tag-sport">Ana antrenman 1</span></td>
-        <td><span class="project-tag tag-farmnara">FarmNara</span> Mentör 1-1 → şirket kurulum + lojistik + restoran outreach danış. <strong>BUGÜN: tek-odak kararı alındı, yan projeler askıya alındı.</strong></td>
+        <td><span class="channel-tag">Üretici / Operasyon</span> <strong>Hikaye-veri akışı oturumu — Okan + Orhanoğlu</strong> · Mentör 1-1: pivot sonrası strateji & lojistik / Pioneer 11 danışma</td>
       </tr>
       <tr>
-        <td><strong>Perşembe 23.04</strong></td>
+        <td><strong>Perşembe 01.05</strong></td>
+        <td style="color:var(--accent-orange);">08:00 – 17:00</td>
+        <td style="color:var(--text-dim);">1 Mayıs (resmi tatil)</td>
+        <td><span class="channel-tag">Üretici / Operasyon</span> Lojistik teklif toplama (Aydın → İstanbul, kuru + soğuk zincir) · Markup fiyat listesi v0 iskeleti</td>
+      </tr>
+      <tr>
+        <td><strong>Cuma 02.05</strong></td>
+        <td style="color:var(--accent-orange);">01:00 – 08:00 + 17:00 – 01:00</td>
+        <td style="color:var(--accent-red); font-weight:600;">KUICK weekly (14:00) · Mali Müşavir 2. görüşme (TBD, dönüşe göre hafta içi olabilir)</td>
+        <td><span class="channel-tag">Üretici / Operasyon</span> <strong>Lojistik teklif deadline</strong> (en geç 02.05 gece) · KUICK haftalık özet (5 kanal yapısı + LTD durum)</td>
+      </tr>
+      <tr>
+        <td><strong>Cumartesi 03.05</strong></td>
         <td style="color:var(--accent-orange);">08:00 – 17:00</td>
         <td>—</td>
-        <td><span class="project-tag tag-sport">Ev mobilite</span></td>
-        <td><span class="project-tag tag-farmnara">FarmNara</span> Mali Müşavir gündem hazırlığı (sorular, belgeler, seçenek tablosu) + lojistik teklif araştırma + restoran Pioneer 11 iletişim verisi</td>
+        <td><span class="channel-tag">Üretici / Operasyon</span> <strong>Akhisar gündem dosyası</strong> (ürün spesi, ambalaj akışı, irsaliye/fatura, ilk sipariş checklist) · markup fiyat listesi v0 tamamla</td>
       </tr>
       <tr>
-        <td><strong>Cuma 24.04</strong></td>
-        <td style="color:var(--accent-orange);">17:00 – 01:00</td>
-        <td style="color:var(--accent-red); font-weight:600;">Mali Müşavir (sabah) · KUICK 14:00 · Qapera 16:00</td>
-        <td><span class="project-tag tag-sport">Ana antrenman 2</span></td>
-        <td><span class="project-tag tag-farmnara">FarmNara</span> <strong>Mali Müşavir görüşmesi (şirket kurulumu)</strong> → KUICK weekly → Qapera → notları brief'e + karar netleştir</td>
-      </tr>
-      <tr>
-        <td><strong>Cumartesi 25.04</strong></td>
-        <td style="color:var(--accent-orange);">17:00 – 01:00</td>
-        <td>—</td>
-        <td><span class="project-tag" style="background:rgba(139,141,151,0.15); color:var(--text-dim);">Boş</span></td>
-        <td><span class="project-tag tag-farmnara">FarmNara</span> İlk restoran çağrıları (Pioneer 11'den 3-5) + lojistik teklif karşılaştırma + şirket kurulum belgelerini tamamla</td>
-      </tr>
-      <tr>
-        <td><strong>Pazar 26.04</strong></td>
+        <td><strong>Pazar 04.05</strong></td>
         <td>—</td>
         <td>—</td>
-        <td><span class="project-tag tag-sport">Ana antrenman 3</span></td>
-        <td><span class="project-tag tag-farmnara">FarmNara</span> Haftalık review + sonraki hafta planı (restoran takibi + lojistik pilot + şirket kurulum ilerleme)</td>
+        <td><span class="channel-tag">Şirket Kurulumu</span> + <span class="channel-tag">Üretici / Operasyon</span> Akhisar yola çıkış hazırlığı · LTD evrak son kontrol · sonraki hafta planı (Akhisar dönüşü + outreach başlangıcı)</td>
       </tr>
     </tbody>
   </table>
+  </div>
 
   <div class="insight-card" style="margin-top:20px;">
     <h3>Hafta Notları</h3>
     <ul>
-      <li><span class="project-tag tag-farmnara">FarmNara</span> <strong>TEK ODAK.</strong> Bu haftanın 3 ana önceliği: (1) şirket kurulumu — Cuma sabah Mali Müşavir görüşmesi, (2) lojistik çözümleri — Volkan/Okan ağı + İstanbul kurye kanalı, (3) restoran görüşmeleri — Pioneer 11'den ilk 3-5 temas. Diğer FarmNara aksiyonları: Mentör 1-1 (Çar), KUICK + Qapera (Cuma öğleden sonra).</li>
-      <li style="color:var(--text-dim);"><strong>⏸ Askıda (22.04 kararı):</strong> CopyBot v2, Web Design, Bergama Futbol, StudyBird, Daily Dispatch (VPS cron çalışmaya devam), Nothing Ever Happens. FarmNara ana faaliyet oturana kadar dokunulmayacak.</li>
-      <li style="color:var(--text-dim);"><strong>Yula (market making):</strong> Salı 01-08, Çar 17-01, Per 08-17, Cuma 17-01, Cmt 17-01. Yula pasif iş — FarmNara çalışmasını engellemez.</li>
+      <li><strong>Bu hafta tek odak FarmNara.</strong> 5 kanaldan en yoğun olanlar: <em>Şirket Kurulumu</em> (LTD kapanışı + İyzico/KDV) ve <em>Üretici/Operasyon</em> (30.04 oturumu, 02.05 lojistik deadline, 05.05 Akhisar prep). <em>Restoran/Satış</em> küçük adımlarla başlar (outreach mesajı taslak). <em>Qapera</em> + <em>ArGe</em> bu hafta arka planda.</li>
+      <li><strong>Mali Müşavir 2. görüşme zamansız:</strong> Cuma'ya kondu ama mali müşavirden dönüşe göre hafta içi başka bir güne (Salı/Çarşamba/Perşembe öğlen) kayabilir. Açık konular bohçası Pazartesi-Salı hazır olsun, çağrıldığında elde olsun.</li>
+      <li><strong>Yula (market making):</strong> Çar 08-17, Per 08-17, Cuma 01-08 + 17-01 (çift slot — 16 saat), Cmt 08-17. Pzt + Salı + Pzr boş. Yula pasif iş, FarmNara'yı engellemez ama Cuma çift slot Yula yoğun — Mali Müşavir görüşmesi Cuma'ya denk gelirse Salı/Çar/Per'e kaydır.</li>
+      <li><strong>Salı 05.05 Akhisar — bir sonraki hafta:</strong> Bu haftanın en kritik hazırlığı. Pazar 04.05 yola çıkış, Salı 05.05 Akhisar'da Orhanoğlu ile operasyon başlangıç oturumu.</li>
+      <li style="color:var(--text-dim);"><strong>Arşiv (29.04 kararı):</strong> CopyBot v2, Web Design, Bergama Futbol, StudyBird, Daily Dispatch (cron çalışıyor), NothingEverHappens — kayıtlar dondu, dashboard'a yansımıyor. FarmNara operasyonu oturduktan sonra durum yeniden değerlendirilecek.</li>
     </ul>
   </div>
 </div>
@@ -727,16 +928,94 @@
 <!-- TAB: HAFTA BAZLI YAPILANLAR -->
 <div id="weekly" class="tab-content">
 
-  <!-- BU HAFTA: 20-26 NİSAN -->
+  <!-- BU HAFTA: 27 NİSAN – 3 MAYIS -->
   <div class="week-section">
-    <h3><span class="dot" style="background:var(--accent-green);"></span> Bu Hafta: 20 – 26 Nisan (Pzt-Pzr) — <span style="color:var(--accent-red);">TEK ODAK: FarmNara</span></h3>
+    <h3><span class="dot" style="background:var(--accent-green);"></span> Bu Hafta: 27 Nisan – 3 Mayıs (Pzt-Pzr) — <span style="color:var(--accent-green);">TEK ODAK: FarmNara · 5 Kanal</span></h3>
+    <table>
+      <thead>
+        <tr><th>Durum</th><th>Kanal</th><th>Görev</th><th>Detay / Deadline</th></tr>
+      </thead>
+      <tbody>
+        <!-- 29.04 yapısal değişiklik kaydı -->
+        <tr style="background:rgba(45,80,22,0.06);">
+          <td><span class="status-dot status-done"></span>Bitti</td>
+          <td><span class="channel-tag">Yapı</span></td>
+          <td>Dashboard 5 kanal yapısına dönüştürüldü</td>
+          <td>29.04 · Spor kolonu kaldırıldı, tüm yan projeler arşive (Bergama dahil), FarmNara 5 kanala (Şirket / Üretici / Restoran / Qapera / ArGe) ayrıldı</td>
+        </tr>
+        <!-- KANAL 1: ŞİRKET KURULUMU -->
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="channel-tag">Şirket Kurulumu</span></td>
+          <td><strong>LTD kuruluş kapanışı</strong></td>
+          <td>Vergi dairesi · NACE kodları · e-imza temini · banka hesabı açılışı. Mali müşavirle paralel iletişim. <span style="color:var(--accent-orange);">Bu hafta</span></td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="channel-tag">Şirket Kurulumu</span></td>
+          <td>Mali Müşavir 2. görüşme — açık konular bohçası</td>
+          <td>İyzico mekaniği (tek hesap mı / pazaryeri mi), KDV oran çiftleşmesi, ambalaj muhasebe yeri, stok/iade/hasar sözleşme maddeleri. <span style="color:var(--accent-orange);">Hafta içi · TBD</span></td>
+        </tr>
+        <!-- KANAL 2: ÜRETİCİ / OPERASYON -->
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="channel-tag">Üretici / Operasyon</span></td>
+          <td><strong>Hikaye-veri akışı oturumu — Okan + Orhanoğlu</strong></td>
+          <td>Çağlar Bey'in tavsiyesi: lot/üretici/fatura zinciri sistem anatomisi, ERP/manuel takip mekaniği. <span style="color:var(--accent-red);">30.04.2026</span></td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="channel-tag">Üretici / Operasyon</span></td>
+          <td><strong>Lojistik teklif toplama</strong></td>
+          <td>Aydın → İstanbul kuru kargo + soğuk zincir teklifleri. Üretici fiyatlarıyla birleştirilmiş güncel fiyat tablosu. <span style="color:var(--accent-red);">02.05.2026 deadline</span></td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="channel-tag">Üretici / Operasyon</span></td>
+          <td>Akhisar gündem dosyası hazırla</td>
+          <td>Salı 05.05 Akhisar ziyareti için yazılı gündem: ürün spesi, ambalaj akışı, irsaliye/fatura prosedürü, ilk sipariş checklist. <span style="color:var(--accent-orange);">Cmt 03.05</span></td>
+        </tr>
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="channel-tag">Üretici / Operasyon</span></td>
+          <td>Markup fiyat listesi v0 (zeytin sofralık)</td>
+          <td>Orhanoğlu alış + ambalaj + lojistik + marj → restoran satış fiyatı taslağı. <span style="color:var(--accent-orange);">Cmt 03.05</span></td>
+        </tr>
+        <!-- KANAL 3: RESTORAN / SATIŞ -->
+        <tr>
+          <td><span class="status-dot status-pending"></span>Bekliyor</td>
+          <td><span class="channel-tag">Restoran / Satış</span></td>
+          <td>Pioneer 11 outreach mesajı v1 taslağı</td>
+          <td>Chef-owner uyumlu, hikaye unsurlu (Kazdağı arıcı, %0.24 asidite vb.) ilk mesaj taslağı. Markup fiyatlar netleşince gönderilecek. <span style="color:var(--accent-orange);">Bu hafta</span></td>
+        </tr>
+        <!-- KANAL 4: QAPERA — bu hafta arka planda -->
+        <tr>
+          <td><span class="status-dot status-waiting"></span>Bekliyor</td>
+          <td><span class="channel-tag">Qapera / Entegrasyon</span></td>
+          <td>Tedarikçi paneli wireframe (taslak)</td>
+          <td>Markup mekaniği netleşince başlanacak. <span style="color:var(--text-dim);">Hedef: 10.05.2026</span></td>
+        </tr>
+        <!-- KANAL 5: ARGE — bu hafta arka planda -->
+        <tr>
+          <td><span class="status-dot status-waiting"></span>Bekliyor</td>
+          <td><span class="channel-tag">ArGe / Strateji</span></td>
+          <td>DE Step 15-16 + Üretici Destek Fonu formülü</td>
+          <td>Fırsat olursa açılır, pilot satışlardan sonra finalize. <span style="color:var(--text-dim);">Geri planda</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 20-26 NİSAN — KAPANDI (eski hafta sabit tarihe çevrildi) -->
+  <div class="week-section">
+    <h3><span class="dot" style="background:var(--text-dim);"></span> 20 – 26 Nisan (Pzt-Pzr) — TEK ODAK: FarmNara</h3>
     <table>
       <thead>
         <tr><th>Durum</th><th>Proje</th><th>Görev</th><th>Detay</th></tr>
       </thead>
       <tbody>
         <!-- 22.04 Karar -->
-        <tr style="background:rgba(239,68,68,0.06);">
+        <tr style="background:rgba(163,61,42,0.06);">
           <td><span class="status-dot status-done"></span>Bitti</td>
           <td><span class="project-tag tag-farmnara">Karar</span></td>
           <td>TEK-ODAK kararı (22.04.2026)</td>
@@ -806,7 +1085,7 @@
         <!-- Askıya alınan projeler kısa not -->
         <tr style="opacity:0.6;">
           <td><span class="status-dot" style="background:var(--text-dim);"></span>Askıda</td>
-          <td><span class="project-tag" style="background:rgba(168,85,247,0.15); color:var(--accent-purple);">CopyBot v2</span></td>
+          <td><span class="project-tag" style="background:rgba(107,76,138,0.15); color:var(--accent-purple);">CopyBot v2</span></td>
           <td>Faz 3 — Askıda</td>
           <td>22.04 kararıyla askıya alındı. Devralma noktası: <code>Projects/CopyBot-v2/docs/faz3-next-session.md</code></td>
         </tr>
@@ -830,7 +1109,7 @@
         </tr>
         <tr style="opacity:0.6;">
           <td><span class="status-dot" style="background:var(--text-dim);"></span>Askıda</td>
-          <td><span class="project-tag" style="background:rgba(239,68,68,0.12); color:var(--accent-red);">Daily Dispatch</span></td>
+          <td><span class="project-tag" style="background:rgba(163,61,42,0.12); color:var(--accent-red);">Daily Dispatch</span></td>
           <td>Geliştirme — Askıda (cron çalışıyor)</td>
           <td>VPS cron (0 7 * * * İstanbul) aktif, Telegram mesajları çalışıyor. Yeni özellik geliştirme durdu.</td>
         </tr>
@@ -925,7 +1204,7 @@
         <!-- R Studios — İPTAL -->
         <tr>
           <td><span class="status-dot" style="background:var(--accent-red);"></span>İptal</td>
-          <td><span class="project-tag" style="background:rgba(59,130,246,0.08); color:var(--text-dim); text-decoration:line-through;">R Studios</span></td>
+          <td><span class="project-tag" style="background:rgba(74,124,40,0.08); color:var(--text-dim); text-decoration:line-through;">R Studios</span></td>
           <td style="text-decoration:line-through; opacity:0.6;">R Studios crash course</td>
           <td style="text-decoration:line-through; opacity:0.6;">Crash course tamamen iptal edildi — program kapatıldı</td>
         </tr>
@@ -1220,133 +1499,148 @@
   </div>
 </div>
 
-<!-- TAB 3: AKSIYONLAR -->
+<!-- TAB 3: AKSIYONLAR (5 kanal yapısı, 29.04.2026) -->
 <div id="actions" class="tab-content">
-  <h3 style="margin-bottom:16px; font-size:16px;">Açık Aksiyon Maddeleri — 20-26 Nisan Haftası · <span style="color:var(--accent-red);">TEK ODAK: FarmNara</span></h3>
+  <div class="tab-card">
+  <h3 style="margin-bottom:16px;">Açık Aksiyon Maddeleri — 27 Nisan – 3 Mayıs Haftası · <span style="color:var(--accent-green);">FarmNara · 5 Kanal</span></h3>
 
-  <div style="margin-bottom:16px; padding:14px 16px; background:rgba(239,68,68,0.08); border-left:3px solid var(--accent-red); border-radius:6px; font-size:13px;">
-    <strong style="color:var(--accent-red);">22.04.2026 Karar:</strong> Yan projeler (CopyBot v2, Web Design, Bergama, StudyBird, Daily Dispatch, NothingEverHappens) askıya alındı. Bu haftanın 3 ana önceliği: <strong>(1)</strong> Şirket kurulumu — Cuma sabah Mali Müşavir · <strong>(2)</strong> Lojistik çözümleri · <strong>(3)</strong> Restoran görüşmeleri başlıyor.
+  <div style="margin-bottom:16px; padding:14px 16px; background:rgba(45,80,22,0.08); border-left:3px solid var(--accent-green); border-radius:6px; font-size:13px;">
+    <strong style="color:var(--accent-green);">29.04.2026 Yapı:</strong> Aksiyonlar artık 5 kanala göre gruplanıyor — <em>Şirket Kurulumu · Üretici/Operasyon · Restoran/Satış · Qapera/Entegrasyon · ArGe/Strateji</em>. Tamamlanan görevler <strong>Hafta Bazlı Yapılanlar</strong> tab'ında; arşivlenen yan projeler bu listede görünmüyor.
   </div>
 
+  <!-- KANAL 1: ŞİRKET KURULUMU -->
+  <h4 style="margin: 16px 0 8px 0; font-size: 14px; color: var(--accent-green);">Kanal 1 · Şirket Kurulumu</h4>
   <ul class="action-list">
-    <!-- FarmNara — 3 Ana Öncelik -->
-    <li class="action-item" style="border-left:3px solid var(--accent-red);">
-      <span class="project-tag tag-farmnara">FarmNara · Öncelik 1</span>
-      <span><strong>Mali Müşavir görüşmesi — Şirket kurulumu başlangıcı</strong> (şahıs/limited seçimi, vergi dairesi, NACE, e-imza, KOSGEB uygunluk)</span>
-      <span class="deadline soon">Cuma 24.04 sabah</span>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Şirket Kurulumu</span>
+      <span><strong>LTD kuruluş kapanışı</strong> — vergi dairesi, NACE kodları, e-imza temini, kuruluş tescili, banka hesabı açılışı</span>
+      <span class="deadline soon">Bu hafta (27 Nis – 3 May)</span>
     </li>
-    <li class="action-item" style="border-left:3px solid var(--accent-red);">
-      <span class="project-tag tag-farmnara">FarmNara · Öncelik 1</span>
-      <span>Mali Müşavir gündem hazırlığı — sorular, belgeler (TC/adres/gelir beyanı), şahıs vs. limited karşılaştırma tablosu</span>
-      <span class="deadline soon">Perşembe 23.04</span>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Şirket Kurulumu</span>
+      <span><strong>Mali Müşavir 2. görüşme — açık konular bohçası</strong> (mali müşavirin dönüşüne göre hafta içi planlanacak)</span>
+      <span class="deadline soon">Hafta içi · TBD</span>
     </li>
-    <li class="action-item" style="border-left:3px solid var(--accent-red);">
-      <span class="project-tag tag-farmnara">FarmNara · Öncelik 2</span>
-      <span><strong>Lojistik çözüm araştırması</strong> — soğuk zincir teklif karşılaştırma (Geliver, Logiwa, Hepsijet sıcaklık kontrollü, lokal kurye + cold box). Min sipariş, km/kg maliyet, Akhisar→İstanbul akış</span>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Şirket Kurulumu</span>
+      <span>İyzico mekaniği — tek hesap mı / pazaryeri mi (markup modeline uygun olan)</span>
       <span class="deadline soon">Bu hafta</span>
     </li>
-    <li class="action-item" style="border-left:3px solid var(--accent-red);">
-      <span class="project-tag tag-farmnara">FarmNara · Öncelik 2</span>
-      <span>Volkan/Okan'a lojistik sorular — mevcut kargo maliyetleri, soğuk zincir partnerleri, deneyim</span>
-      <span class="deadline">Bu hafta</span>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Şirket Kurulumu</span>
+      <span>KDV oran çiftleşmesi: fabrika → FarmNara KDV ile FarmNara → restoran KDV uyumu, indirim mekaniği</span>
+      <span class="deadline soon">Bu hafta</span>
     </li>
-    <li class="action-item" style="border-left:3px solid var(--accent-red);">
-      <span class="project-tag tag-farmnara">FarmNara · Öncelik 3</span>
-      <span><strong>Restoran görüşmeleri başlat</strong> — Pioneer 11'den ilk 3-5 chef/chef-owner ile keşif. Outreach mesajı v1 (WhatsApp + email) + ilk randevu ayarla</span>
-      <span class="deadline soon">Bu hafta + Cmt 25.04</span>
-    </li>
-    <li class="action-item" style="border-left:3px solid var(--accent-red);">
-      <span class="project-tag tag-farmnara">FarmNara · Öncelik 3</span>
-      <span>Pioneer 11 iletişim verisi — email + WhatsApp + chef adları doğrula (Google/Instagram/LinkedIn)</span>
-      <span class="deadline">Perşembe 23.04</span>
-    </li>
-
-    <!-- FarmNara — Haftanın Diğer Sabit Etkinlikleri -->
-    <li class="action-item">
-      <span class="project-tag tag-farmnara">FarmNara</span>
-      <span>Mentör 1-1 görüşmesi (Ender Bey) — şirket kurulumu + lojistik + restoran outreach danışma</span>
-      <span class="deadline soon">Çar 22.04 15:00</span>
-    </li>
-    <li class="action-item">
-      <span class="project-tag tag-farmnara">FarmNara</span>
-      <span>KUICK weekly — Hafta 4 progress özeti (DE 14/24 + Restoran Listesi v1 + şirket kurulumu start)</span>
-      <span class="deadline soon">Cuma 24.04 14:00</span>
-    </li>
-    <li class="action-item">
-      <span class="project-tag tag-farmnara">FarmNara</span>
-      <span>Qapera görüşmesi (Çağlar Yılmaz) — kalibrasyon + SaaS modeli</span>
-      <span class="deadline soon">Cuma 24.04 16:00</span>
-    </li>
-
-    <!-- FarmNara — Arka plan -->
-    <li class="action-item">
-      <span class="project-tag tag-farmnara">FarmNara</span>
-      <span>Restoran Listesi v1.1 — Pioneer 11 dışı listeden ek iletişim + kapasite doğrulama</span>
-      <span class="deadline">Nisan sonu</span>
-    </li>
-    <li class="action-item">
-      <span class="project-tag tag-farmnara">FarmNara</span>
-      <span>DE Step 15-16 — Key Assumptions + Test Protokolü (varsayım testi) — fırsat olursa</span>
-      <span class="deadline">Fırsat olursa</span>
-    </li>
-    <li class="action-item">
-      <span class="project-tag tag-farmnara">FarmNara</span>
-      <span>Astro + Supabase migrate planı (v2 HTML → Astro component) — geri planda</span>
-      <span class="deadline">Önümüzdeki hafta</span>
-    </li>
-
-    <!-- Tamamlananlar -->
-    <li class="action-item" style="opacity:0.5; text-decoration:line-through;">
-      <span class="project-tag tag-farmnara">FarmNara</span>
-      <span>DE Steps 7-14 tamamla ✓ 15 dosya mentör-hazır</span>
-      <span class="deadline" style="color:var(--accent-green)">21.04 gece</span>
-    </li>
-    <li class="action-item" style="opacity:0.5; text-decoration:line-through;">
-      <span class="project-tag tag-farmnara">FarmNara</span>
-      <span>Mentör 1-1 hazırlık raporu (13 sayfa PDF) ✓ TAMAMLANDI</span>
-      <span class="deadline" style="color:var(--accent-green)">22.04 sabah</span>
-    </li>
-    <li class="action-item" style="opacity:0.5; text-decoration:line-through;">
-      <span class="project-tag tag-farmnara">FarmNara</span>
-      <span>Restoran Listesi v1 (30 İst. + 20 Ege, Michelin + G&amp;M 2026) ✓</span>
-      <span class="deadline" style="color:var(--accent-green)">21.04 gece</span>
-    </li>
-    <li class="action-item" style="opacity:0.5; text-decoration:line-through;">
-      <span class="project-tag tag-farmnara">FarmNara</span>
-      <span>Website v2 FrontEnd paketi (4/4) + Hub + Netlify canlı ✓</span>
-      <span class="deadline" style="color:var(--accent-green)">20-21.04</span>
-    </li>
-
-    <!-- ASKIDAKI PROJELER -->
-    <li class="action-item" style="opacity:0.55; border-left:3px solid var(--text-dim);">
-      <span class="project-tag" style="background:rgba(168,85,247,0.12); color:var(--accent-purple);">CopyBot v2 — Askıda</span>
-      <span>Faz 3 başlangıcı + Faz 4 öncesi wrap — FarmNara tek odak bitene kadar dokunulmayacak. Devralma: <code>docs/faz3-next-session.md</code></span>
-      <span class="deadline">Askıda</span>
-    </li>
-    <li class="action-item" style="opacity:0.55; border-left:3px solid var(--text-dim);">
-      <span class="project-tag tag-webdesign">Web Design — Askıda</span>
-      <span>Ajan iskelet + outreach altyapısı + lead listesi rehberi — tümü askıda</span>
-      <span class="deadline">Askıda</span>
-    </li>
-    <li class="action-item" style="opacity:0.55; border-left:3px solid var(--text-dim);">
-      <span class="project-tag tag-studybird">StudyBird — Askıda</span>
-      <span>Godot 4.x + Game Studios kurulumu — askıda</span>
-      <span class="deadline">Askıda</span>
-    </li>
-    <li class="action-item" style="opacity:0.55; border-left:3px solid var(--text-dim);">
-      <span class="project-tag tag-bergama">Bergama — Askıda</span>
-      <span>Belediye geri bildirim verileri — reaktif (cevap gelirse değerlendir)</span>
-      <span class="deadline">Askıda</span>
-    </li>
-    <li class="action-item" style="opacity:0.55; border-left:3px solid var(--text-dim);">
-      <span class="project-tag" style="background:rgba(239,68,68,0.12); color:var(--accent-red);">Daily Dispatch — Askıda</span>
-      <span>Yeni özellik geliştirme askıda — VPS cron çalışıyor, mevcut Telegram akışı devam ediyor</span>
-      <span class="deadline">Askıda</span>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Şirket Kurulumu</span>
+      <span>Ambalaj muhasebe yeri (fabrika maliyeti vs FarmNara satın alımı) + Stok/iade/hasar sözleşme maddeleri</span>
+      <span class="deadline soon">Bu hafta</span>
     </li>
   </ul>
 
-  <div style="margin-top:24px; padding:14px 16px; background:rgba(139,141,151,0.08); border-left:3px solid var(--text-dim); border-radius:6px; font-size:13px; color:var(--text-secondary);">
-    <strong style="color:var(--text-dim);">Askı Notu (22.04.2026):</strong> Askıya alınan projeler FarmNara ana faaliyet oturana (şirket kurulumu tamam, lojistik pilotu çalışıyor, ilk restoran sözleşmesi imzalandı) kadar dokunulmayacak. Proje brief'leri dondurulmuş durumda, kaldığımız yerden devam edilebilir.
+  <!-- KANAL 2: ÜRETİCİ / OPERASYON -->
+  <h4 style="margin: 20px 0 8px 0; font-size: 14px; color: var(--accent-green);">Kanal 2 · Üretici / Operasyon</h4>
+  <ul class="action-list">
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Üretici / Operasyon</span>
+      <span><strong>Akhisar ziyareti — Orhanoğlu Fabrikası (Aydın) operasyon başlangıcı</strong> · Okan Mordal ile ürün spesi, ambalaj akışı, irsaliye/fatura prosedürleri, ilk sipariş hazırlığı</span>
+      <span class="deadline soon">Salı 05.05.2026</span>
+    </li>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Üretici / Operasyon</span>
+      <span><strong>Hikaye-veri akışı sistem anatomisi oturumu</strong> — Okan + Orhanoğlu ekibi (lot/üretici/fatura zinciri, Çağlar Bey'in tavsiyesi)</span>
+      <span class="deadline soon">30.04.2026</span>
+    </li>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Üretici / Operasyon</span>
+      <span><strong>Lojistik teklif toplama</strong> — Aydın → İstanbul kuru kargo + soğuk zincir; üretici fiyatlarıyla birleştirilmiş güncel fiyat tablosu</span>
+      <span class="deadline soon">02.05.2026</span>
+    </li>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Üretici / Operasyon</span>
+      <span>Akhisar gündem dosyası (yazılı brief) — ürün spesi, ambalaj, irsaliye/fatura, ilk sipariş checklist</span>
+      <span class="deadline">Cmt 03.05.2026</span>
+    </li>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Üretici / Operasyon</span>
+      <span>Markup fiyat listesi v0 (zeytin sofralık) — Orhanoğlu alış + ambalaj + lojistik + marj → restoran satış fiyatı</span>
+      <span class="deadline">Cmt 03.05.2026</span>
+    </li>
+  </ul>
+
+  <!-- KANAL 3: RESTORAN / SATIŞ -->
+  <h4 style="margin: 20px 0 8px 0; font-size: 14px; color: var(--accent-green);">Kanal 3 · Restoran / Satış</h4>
+  <ul class="action-list">
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Restoran / Satış</span>
+      <span><strong>Pioneer 11 outreach mesajı v1 taslağı</strong> — chef-owner uyumlu, hikaye unsurlu (Kazdağı arıcı, %0.24 asidite vb.)</span>
+      <span class="deadline soon">Bu hafta</span>
+    </li>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Restoran / Satış</span>
+      <span>Restoran Listesi v1.1 — Pioneer 11 iletişim verisi (email + WhatsApp) + kapasite doğrulama</span>
+      <span class="deadline">Nisan sonu</span>
+    </li>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Restoran / Satış</span>
+      <span>İlk 3-5 chef/chef-owner ile keşif görüşmesi — markup fiyat listesi hazır olunca</span>
+      <span class="deadline">Mayıs ilk hafta</span>
+    </li>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Restoran / Satış</span>
+      <span>Konsiyerj test gündemi — haftada 1 teslimat senaryosu, fiyat %15 altında + kalite sözü</span>
+      <span class="deadline">Mayıs</span>
+    </li>
+  </ul>
+
+  <!-- KANAL 4: QAPERA / ENTEGRASYON -->
+  <h4 style="margin: 20px 0 8px 0; font-size: 14px; color: var(--accent-green);">Kanal 4 · Qapera / Entegrasyon</h4>
+  <ul class="action-list">
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Qapera / Entegrasyon</span>
+      <span>Qapera tedarikçi paneli wireframe + API entegrasyon spesi (24.04 Çağlar Bey görüşmesi planı)</span>
+      <span class="deadline">10.05.2026</span>
+    </li>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Qapera / Entegrasyon</span>
+      <span>Qapera teknik 2. görüşme — API detayları (entegrasyon kapsamı netleştirme)</span>
+      <span class="deadline">15.05.2026</span>
+    </li>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">Qapera / Entegrasyon</span>
+      <span>Fiyat listesi senkron mekaniği (FarmNara → Qapera) — markup mekaniği netleştikten sonra</span>
+      <span class="deadline">Mayıs sonu</span>
+    </li>
+  </ul>
+
+  <!-- KANAL 5: ARGE / STRATEJİ -->
+  <h4 style="margin: 20px 0 8px 0; font-size: 14px; color: var(--accent-green);">Kanal 5 · ArGe / Strateji</h4>
+  <ul class="action-list">
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">ArGe / Strateji</span>
+      <span>DE Step 15-16 — Key Assumptions + Test Protokolü (varsayım testi)</span>
+      <span class="deadline">Fırsat olursa</span>
+    </li>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">ArGe / Strateji</span>
+      <span>Üretici Destek Fonu formülü — markup üzerinden % oran (markup'ın %15-20'si, pilot satışlardan sonra finalize)</span>
+      <span class="deadline">Pilot sonrası</span>
+    </li>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">ArGe / Strateji</span>
+      <span>Astro + Supabase migrate planı (v2 HTML → Astro component) — geri planda</span>
+      <span class="deadline">Önümüzdeki hafta</span>
+    </li>
+    <li class="action-item" style="border-left:3px solid var(--accent-green);">
+      <span class="channel-tag">ArGe / Strateji</span>
+      <span>26.04 Escrow & Hukuki Yol Haritası raporunu markup modeline göre güncelle (rapor komisyon-zeminliydi)</span>
+      <span class="deadline">Mayıs</span>
+    </li>
+  </ul>
+
+  <div style="margin-top:24px; padding:14px 16px; background:rgba(139,141,151,0.08); border-left:3px solid var(--text-dim); border-radius:6px; font-size:13px; color:var(--text-dim);">
+    <strong style="color:var(--text-dim);">Arşiv Notu (29.04.2026):</strong> Tüm yan projeler arşive alındı (CopyBot v2, Web Design, Bergama Futbol, StudyBird, Daily Dispatch, NothingEverHappens). Aksiyonlar tab'ı sadece FarmNara açık görevlerini gösterir. Tamamlanan FarmNara görevleri <strong>Hafta Bazlı Yapılanlar</strong> tab'ında.
+  </div>
   </div>
 </div>
 
@@ -1354,6 +1648,49 @@
 <div id="timeline" class="tab-content">
   <div class="timeline-container">
     <h3 style="margin-bottom:16px;">İlerleme Zaman Çizelgesi</h3>
+
+    <!-- 29.04 — Yapısal Sadeleştirme + Yeni Hafta Açılışı -->
+    <div class="timeline-item">
+      <div class="timeline-date">29.04</div>
+      <div class="timeline-content">
+        <strong style="color:var(--accent-green);">Dashboard Yapısal Sadeleştirme + Hafta 27 Nis – 3 May Açılışı:</strong> Can'ın "ana ekran sadece FarmNara'ya ait olsun" kararıyla dashboard yeniden yapılandırıldı.<br>
+        <strong>Arşivlenen yan projeler (Bergama dahil):</strong> CopyBot v2, Web Design, Bergama Futbol, StudyBird, Daily Dispatch (VPS cron çalışmaya devam), NothingEverHappens. Tüm proje kartları + askı satırları + aksiyon maddeleri kaldırıldı; küçük arşiv blok'unda sade liste olarak duruyor. Brief'ler ve kaynak kod dokunulmadı.<br>
+        <strong>FarmNara 5 görev kanalı:</strong> (1) <em>Şirket Kurulumu</em> — LTD kapanışı + İyzico/KDV + sözleşme; (2) <em>Üretici / Operasyon</em> — Orhanoğlu/Akhisar + lojistik + fiyat listesi; (3) <em>Restoran / Satış</em> — Pioneer 11 outreach + konsiyerj test; (4) <em>Qapera / Entegrasyon</em> — tedarikçi paneli + API; (5) <em>ArGe / Strateji</em> — DE 15-16 + UDF formülü + Astro/Supabase + escrow güncelleme.<br>
+        <strong>Kaldırılan:</strong> Spor kolonu (Haftalık Program tab'ından çıktı, kişisel takvime taşındı). "Aktif/Askıda/Önceliğin sayısı" gibi karışık quick stat'lar yerine FarmNara odaklı temiz stat'lar.<br>
+        <strong>Bu hafta gündem:</strong> Mali Müşavir 2. görüşme (TBD, hafta içi · İyzico/KDV/ambalaj/stok bohçası), Çar 30.04 hikaye-veri oturumu (Okan + Orhanoğlu) + Mentör 1-1 (15:00), 02.05 lojistik teklif deadline, Cmt 03.05 Akhisar gündem dosyası + markup fiyat listesi v0, Salı 05.05 Akhisar ziyareti.
+      </div>
+    </div>
+
+    <!-- 28.04 — Operasyon Pivot Kayıt -->
+    <div class="timeline-item">
+      <div class="timeline-date">28.04</div>
+      <div class="timeline-content">
+        <strong style="color:var(--accent-green);">FarmNara Operasyon Pivot — 3 büyük değişiklik:</strong><br>
+        <strong>1) Şirket — Limited Şirket kararı kesin:</strong> 24.04 mali müşavir görüşmesi sonucu LTD seçildi (yatırımcı uyumu, hisse devri kolaylığı). Domain <code>farmnara.com</code> + kurumsal mail <code>can@farmnara.com</code> aktif. Vergi dairesi/NACE/e-imza adımları bu hafta kapanıyor.<br>
+        <strong>2) İş modeli pivot — komisyon → markup:</strong> Eski "%3-5 komisyon + 3 kanal" geçersiz. Yeni: FarmNara fabrikadan al-sat marjı ile gelir. Para FarmNara hesabına (İyzico) düşer, fabrikaya buradan ödeme. Faturalama: fabrika → FarmNara, FarmNara → restoran. İrsaliye fabrika → restoran. Klasik distribütör pozisyonu. Üretici Destek Fonu yaşıyor — formül markup % oranına çevrildi (pilot sonrası finalize).<br>
+        <strong>3) Fabrika partneri Orhanoğlu (Aydın), Volkan değil:</strong> Sofralık zeytinde Orhanoğlu Fabrikası — Okan Mordal'ın kendi üretimini yaptırdığı tesis. Volkan Güneş / Güneş Fabrikası ile çalışılmıyor. Salı 05.05.2026 Akhisar ziyareti = ilk operasyon oturumu.<br>
+        <strong>Açık konular (mali müşavir):</strong> İyzico tek hesap vs pazaryeri/alt-üye, KDV oran çiftleşmesi, ambalaj muhasebe yeri, stok/iade/hasar sözleşme maddeleri.
+      </div>
+    </div>
+
+    <!-- 26.04 — Escrow & Hukuki Yol Haritası -->
+    <div class="timeline-item">
+      <div class="timeline-date">26.04</div>
+      <div class="timeline-content">
+        <strong>FarmNara Escrow & Hukuki Yol Haritası TAMAMLANDI:</strong> 2 PDF (19+12 sayfa). Rapor 1: 6493/TCMB/6563/MASAK/KVKK/TKHK + 3 escrow modeli + PSP karşılaştırma + müstahsil makbuzu + 26 haftalık yol haritası + 6 risk. Rapor 2: 7 blok mali müşavir soru bankası + 14 maddelik karar checklist (Cuma sabah görüşmesi için printable). QA: GREEN. <strong>Not (28.04):</strong> Rapor komisyon modeline göre yazıldı; 28.04 markup pivotu sonrası ArGe kanalında güncellenecek.
+      </div>
+    </div>
+
+    <!-- 24.04 — Mali Müşavir + KUICK + Qapera -->
+    <div class="timeline-item">
+      <div class="timeline-date">24.04</div>
+      <div class="timeline-content">
+        <strong>FarmNara — 3 görüşme tek günde:</strong><br>
+        <strong>Mali Müşavir (sabah):</strong> LTD kararı. Şahıs vs limited karşılaştırması yapıldı, yatırımcı uyumu için LTD seçildi.<br>
+        <strong>KUICK weekly (14:00):</strong> Hafta 4 progress sunumu — DE 14/24 + Restoran Listesi v1 + şirket kurulumu start.<br>
+        <strong>Qapera — Çağlar Yılmaz (16:00):</strong> Somut iş birliği çerçevesi: FarmNara Qapera tedarikçi modülünde listelenecek + kendi tedarikçi panelini API entegrasyonu ile kuracak. Tavsiye: zeytin+zeytinyağı ile başla (stoklanabilir), lot/üretici/fatura zinciri sağlam kurulsun, Craftgate/TRPay düşünülmeli, lojistik fiyat tablosu çıkarılmalı.
+      </div>
+    </div>
 
     <!-- 22.04 -->
     <div class="timeline-item">
@@ -1521,36 +1858,60 @@
 <!-- TAB 5: NOTLAR & FIRSATLAR -->
 <div id="insights" class="tab-content">
 
-  <div class="insight-card">
-    <h3>Bu Haftanın 3 Ana Önceliği (22.04 Karar — TEK ODAK: FarmNara)</h3>
+  <div class="insight-card" style="border-left:4px solid var(--accent-green);">
+    <h3>29.04.2026 Yapısal Sadeleştirme — Dashboard FarmNara'ya Tam Adanma</h3>
     <ul>
-      <li><strong>1) Şirket Kurulumu — Cuma 24.04 sabah Mali Müşavir görüşmesi:</strong> Şahıs vs. limited karşılaştırması, vergi dairesi kaydı, NACE kodları (tarım ürünleri aracılık/komisyon + yazılım/platform), e-imza temini, KOSGEB 2026/2 uygunluk koşulları, ilk fatura öncesi gereken adımlar. Gündem Perşembe 23.04'te hazırlanacak — ön sorular + belge listesi + hedef tablosu.</li>
-      <li><strong>2) Lojistik Çözümleri:</strong> FarmNara iş modelinin kritik değişkeni. Soğuk zincir teklifleri (Geliver, Logiwa, Hepsijet sıcaklık kontrollü) + lokal kurye + cold box hibrit karşılaştırma. Minimum sipariş, km/kg maliyet, Akhisar→İstanbul gün/saat akışı. Volkan + Okan ağından mevcut deneyim + İstanbul tarafı soğutmalı kurye araştırması.</li>
-      <li><strong>3) Restoran Görüşmeleri Başlıyor:</strong> Pioneer 11 önceliklendirildi. Bu hafta ilk 3-5 chef/chef-owner ile keşif görüşmesi için iletişim kurulacak. Outreach mesajı v1 (WhatsApp + email), randevu ayarla, PMR sorularını sahaya çıkar. DE Step 17 (Sales Process) bu görüşmelerden öğrenilerek yazılacak.</li>
-      <li><strong>Haftanın sabit etkinlikleri:</strong> Mentör 1-1 (Çar 22.04 15:00 — 3 ana önceliği danış), KUICK weekly (Cuma 24.04 14:00 — Hafta 4 progress), Qapera görüşmesi (Cuma 24.04 16:00 — kalibrasyon + SaaS modeli).</li>
-      <li><strong>Askıya alınanlar (22.04 kararı):</strong> CopyBot v2, Web Design, Bergama Futbol, StudyBird, Daily Dispatch (cron çalışıyor), Nothing Ever Happens — tümü FarmNara ana faaliyet oturana kadar dokunulmayacak.</li>
+      <li><strong>Tüm yan projeler arşivde — Bergama dahil:</strong> İşler operasyon fazına geçince (LTD kuruluş + üretici sözleşmesi + ilk satış denemeleri) odağı dağıtmamak için tüm yan projelerin proje kartı, askı satırı ve aksiyon maddesi kaldırıldı. Dashboard sadece FarmNara. Brief'ler ve kaynak kod dokunulmadı; "donmuş arşiv" durumda.</li>
+      <li><strong>FarmNara → 5 görev kanalı:</strong> Tek büyük FarmNara kartı yerine 5 kanal (<em>Şirket Kurulumu · Üretici/Operasyon · Restoran/Satış · Qapera/Entegrasyon · ArGe/Strateji</em>). Her kanal kendi açık görev listesini, deadline'ını ve sahibini taşıyor. Aksiyonlar tab'ı da bu yapıya göre 5 başlık altında gruplanmış durumda.</li>
+      <li><strong>Spor satırları çıktı:</strong> Haftalık Program tab'ında "Spor" kolonu kaldırıldı; spor programı kişisel takvimde tutulacak, dashboard'a yansıtılmayacak.</li>
+      <li><strong>Quick stat'lar sade:</strong> "FarmNara · 5 Kanal · 14 Açık Aksiyon · Salı 05.05 Akhisar" — proje sayısı / askı sayısı gibi rakamlar artık yok, çünkü sadece tek proje var ve onun iç yapısına odaklanıyoruz.</li>
+    </ul>
+  </div>
+
+  <div class="insight-card" style="border-left:4px solid var(--accent-green);">
+    <h3>28.04.2026 Operasyon Pivot — Ne değişti, neden?</h3>
+    <ul>
+      <li><strong>Şirket — Limited Şirket kararı kesin:</strong> 24.04 mali müşavir görüşmesinde LTD seçildi (yatırımcı uyumu, hisse devri kolaylığı). Domain <code>farmnara.com</code> ve kurumsal mail <code>can@farmnara.com</code> aktif. Vergi dairesi/NACE/e-imza adımları bu hafta kapanıyor.</li>
+      <li><strong>İş modeli pivotu — komisyon kalktı, markup geldi:</strong> Eski "%3-5 komisyon + 3 kanal" geçersiz. Yeni: FarmNara fabrikadan al-sat marjı ile gelir. Para FarmNara hesabına (İyzico) düşer, fabrikaya buradan ödeme. Faturalama: fabrika → FarmNara, FarmNara → restoran. İrsaliye fabrika → restoran. Klasik distribütör pozisyonu.</li>
+      <li><strong>Fabrika partneri — Orhanoğlu (Aydın), Volkan değil:</strong> Sofralık zeytinde Orhanoğlu Fabrikası, Okan Mordal'ın kendi üretimini yaptırdığı tesis. Volkan Güneş / Güneş Fabrikası ile çalışılmıyor. Salı 05.05.2026 Akhisar ziyareti = ilk operasyon oturumu.</li>
+      <li><strong>Qapera çerçevesi aynen geçerli:</strong> 24.04 Çağlar Bey görüşmesinden çıkan plan değişmedi. FarmNara hem Qapera tedarikçi panelinde listelenecek hem kendi tedarikçi panelini API entegrasyonu ile kuracak. Restoran tarafının ana giriş noktası Qapera, FarmNara web sitesi arz/hikaye tarafı.</li>
+      <li><strong>Üretici Destek Fonu — yaşıyor, formül yenileniyor:</strong> "Komisyonun %20'si" formülü geçersiz. Yeni: markup'ın %15-20'si UDF'ye ayrılır (pilot satışlardan sonra finalize). QR mesajı "Bu siparişten X TL üreticiye geri döndü" korunuyor.</li>
+      <li><strong>Müstahsil makbuzu — fabrika sorumluluğu:</strong> Markup modelinde çiftçi ↔ fabrika arasındaki belge fabrikanındır. FarmNara hikaye/QR için lot/üretici dijital takibi tutar; resmi belge ≠ hikaye verisi.</li>
+    </ul>
+  </div>
+
+  <div class="insight-card">
+    <h3>Bu Haftanın Önceliği (27 Nis – 3 May) — Kanal Bazında</h3>
+    <ul>
+      <li><strong>Şirket Kurulumu:</strong> LTD kapanışı (vergi dairesi/NACE/e-imza/banka) + Mali Müşavir 2. görüşme bohçası (İyzico mekaniği, KDV oran çiftleşmesi, ambalaj muhasebe, stok/iade/hasar sözleşme).</li>
+      <li><strong>Üretici / Operasyon:</strong> 30.04 hikaye-veri akışı oturumu (Okan + Orhanoğlu) → 02.05 lojistik teklif deadline → Cmt 03.05 Akhisar gündem dosyası + markup fiyat listesi v0 → Salı 05.05 Akhisar ziyareti.</li>
+      <li><strong>Restoran / Satış:</strong> Pioneer 11 outreach mesajı v1 taslağı (markup fiyatlar netleşince gönderilecek). Liste v1.1 iletişim verisi paralel ilerlesin.</li>
+      <li><strong>Qapera:</strong> Bu hafta arka planda. Markup mekaniği netleşince wireframe'e başlanacak.</li>
+      <li><strong>ArGe:</strong> Bu hafta arka planda. DE 15-16 fırsat olursa, UDF formülü pilot sonrası, Astro/Supabase önümüzdeki hafta.</li>
     </ul>
   </div>
 
   <div class="insight-card">
     <h3>Fırsatlar ve Öneriler</h3>
     <ul>
-      <li><strong>Mali Müşavir öncesi hazırlık — seçenek tablosu yaz:</strong> Şahıs (basit usul/gerçek usul) vs. limited (asgari sermaye 50K₺ değil artık 10K₺; Ekim 2023 sonrası) karşılaştırması. Komisyon modeli için sorulacak: KDV oranı (aracılık %18 mi, gıda %1/8/20 mi?), fatura kesme prosedürü, e-arşiv/e-fatura zorunluluğu. Bu tabloyu öncesinde çıkarmak görüşmeyi 2 katı verimli yapar.</li>
-      <li><strong>Lojistik pilotu için 2 senaryo hazırla:</strong> Senaryo A — 3PL (Geliver/Logiwa sıcaklık kontrollü, tek nokta → 10 nokta), Senaryo B — lokal kurye + cold box (Akhisar'dan İstanbul deposu, oradan MotoExpress/Yurtiçi same-day). Her senaryo için ilk 10 siparişte maliyet tahminini çıkar — mentör toplantısında sor.</li>
-      <li><strong>Restoran outreach — chef psikolojisi:</strong> Chef-owner'lar satıcıyla değil, vizyoner/hikaye anlatıcı biriyle konuşmak isterler. Outreach mesajı "Kazdağı arıcı ailesi + 45 kovan + %0.24 asidite" gibi somut hikaye unsurları içermeli. Michelin restoran menü analizi yap → hangi kategori eksik (örn: Bodrum kekiği, Manisa üzümü), ilk mesajda niche bir ürün öner.</li>
-      <li><strong>Concierge test gündemi:</strong> WhatsApp + Google Sheets ile 1-2 restoran + 1-2 çiftçi arasında insan-powered marketplace. Bu hafta Pioneer 11 görüşmelerinde sorulacak: "Bir ay haftada 1 teslimat yapsak, fiyat %15 altında olsa + kalite sözü verilse dener misiniz?"</li>
-      <li><strong>KOSGEB 2026/2 takvimi:</strong> Başvurular tipik olarak Haziran açılır. Şirket Cuma kurulursa Temmuz itibariyle 2 aylık faaliyet kaydı olur — başvuruya uygun. Mali müşavire bu takvim için proaktif sor.</li>
+      <li><strong>Mali Müşavir 2. görüşme bohçası — yazılı PDF olarak götür:</strong> "İyzico tek hesap vs pazaryeri" karşılaştırması, "fabrika→FarmNara→restoran KDV mekaniği" akış diyagramı, "stok/iade riski" örnek senaryolar (üretim hatası, restoran iadesi, son kullanma tarihi). Görüşme zamansız ama bohça hazır olunca dakikalar içinde randevu alınabilir.</li>
+      <li><strong>Lojistik 2 senaryo + birim ekonomisi:</strong> Senaryo A — 3PL (Geliver/Logiwa sıcaklık kontrollü, tek nokta → 10 nokta), Senaryo B — lokal kurye + cold box (Akhisar→İstanbul deposu→same-day kurye). Her iki senaryoda 100kg sofralık zeytin için kg başı maliyet çıkar; markup hesabıyla çakıştır. <em>Üretici/Operasyon kanalı.</em></li>
+      <li><strong>Restoran outreach — chef psikolojisi + Michelin menü analizi:</strong> Pioneer 11'den her chef için açık menüye bak, eksik kategoriyi bul (Bodrum kekiği? Manisa üzümü?), ilk mesajda niche ürünü öner. Hikaye unsuru: "Kazdağı arıcı ailesi + 45 kovan + %0.24 asidite" gibi sayılı detay. <em>Restoran/Satış kanalı.</em></li>
+      <li><strong>Konsiyerj test taslağı — outreach mesajına gömülsün:</strong> "Bir ay haftada 1 teslimat yapsak, fiyat %15 altında olsa + kalite sözü verilse dener misiniz?" — bu cümle outreach mesajı v1'de soft-CTA olarak yer alabilir. Cevap gelirse hızlı pilota dönüştürülür.</li>
+      <li><strong>KOSGEB 2026/2 takvimi:</strong> Başvurular tipik Haziran açılır. LTD bu hafta kurulursa Temmuz'da 2 aylık faaliyet kaydı olur — başvuruya uygun. Mali müşavire 2. görüşmede sor: "Hangi tarihten itibaren faaliyet kaydı sayılır, başvuru için ne lazım?"</li>
+      <li><strong>Akhisar ziyareti = "ortak ritim" oturumu:</strong> Orhanoğlu ile sadece ürün spesi konuşmak yetmez — haftalık sipariş/üretim/sevkiyat ritmini netleştir (örn: "FarmNara her Pazartesi öğleden önce siparişi toplar, Çar üretim, Per sevkiyat"). Ritim olmadan ilk 5 sipariş kaosu olur.</li>
     </ul>
   </div>
 
   <div class="insight-card">
     <h3>Riskler</h3>
     <ul>
-      <li><strong>Şirket kurulumu hızı:</strong> Şahıs ~3-5 iş günü, limited ~10-15 iş günü + asgari sermaye bloke. Cuma sabah kararla, sonraki hafta başvuru pratikte en gerçekçi senaryo. Çok hızlı karar verip yanlış tür seçmekten kaçın — Mali Müşavirin 1-2 günlük analiz süresine izin ver.</li>
-      <li><strong>Lojistik bütçe gerçekçiliği:</strong> Soğuk zincir maliyeti büyük sorun yaratabilir (kg başı 50-150₺ olabilir). İş modeli %18 komisyonla bunu karşılayabilir mi? Sepetteki gıda maliyeti + lojistik + komisyon + restoran marjı = restoran satış fiyatı. Gerçek hesap yap, büyük sürprizlerden kaçın.</li>
-      <li><strong>Restoran outreach cevapsızlık:</strong> Cold outreach cevap oranı tipik %3-10. Pioneer 11'den 11 kişiye ulaşırsan 1-2 cevap bekle. Erken hayal kırıklığı için hazırlıklı ol — liste genişletme (v1.1) kritik. Cevap gelmediğinde pattern analiz et (mesaj tonu mu? zamanlama mı? kanal mı?).</li>
-      <li><strong>3 önceliği aynı hafta yüklemek:</strong> Mali Müşavir + lojistik araştırma + restoran outreach tek hafta. Cuma yoğun (Mali Müşavir + KUICK + Qapera). Çar+Per+Cmt+Pzr açık. Her önceliğe günde 2-3 saat + aralarında paralel ilerleme. Önceliklerden birini feda etmek gerekirse lojistik araştırma haftaya kayabilir (restoran ile şirket kurulumu çıkış noktaları).</li>
-      <li><strong>Askıya alınan projelerin sessiz kaybı:</strong> CopyBot v2 ve Web Design Üzerinde ivme birikmişti — askıya almak ivmeyi söndürebilir. 2 hafta sonunda (6 Mayıs civarı) status check yap: FarmNara ilerleme tatmin edici mi? Değilse süreyi uzat, ivmeli ise bir projeyi geri aç.</li>
+      <li><strong>LTD kuruluş hızı:</strong> ~10-15 iş günü + asgari sermaye bloke. Bu hafta kapanış için her gün takip + e-imza + banka hesabı paralel ilerlemeli. Bir adım sıkışırsa (örn: e-imza) tüm zincir kayar — alternatif PSP onayı için hazırlığı paralel tut.</li>
+      <li><strong>Markup birim ekonomisi belirsizliği:</strong> Soğuk zincir maliyeti kg başı 50-150₺ olabilir. Markup modelinde restoran satış fiyatı = fabrika alış + ambalaj + lojistik + FarmNara marjı + KDV. İlk fiyat listesi v0'da gerçekçi sayılarla çıkmazsa ya marj çok dar olur (sürdürülemez) ya da restoran fiyatı yüksek olur (satış olmaz). 02.05 lojistik teklifi geldiğinde gerçek hesabı çıkar.</li>
+      <li><strong>Restoran outreach cevapsızlık:</strong> Cold outreach cevap oranı %3-10. Pioneer 11'den 11 kişide 1-2 cevap bekle. Liste v1.1 (Pioneer dışı, Mayıs sonu hedef) erken hazırlıklı olunsun. Cevapsızlık pattern analizi: ton mu? zamanlama mı? kanal (mail vs WhatsApp)?</li>
+      <li><strong>3 kanal aynı anda yüklenmiş hafta:</strong> Şirket Kurulumu + Üretici/Operasyon + Restoran/Satış paralel. Çar 30.04 yoğun (Yula 08-17 + Mentör 15:00 + 30.04 hikaye-veri oturumu). Cuma çift Yula slotu (16 saat). Mali müşavir görüşmesi Cuma'ya rastlarsa Salı/Çar/Per öğlen tercih.</li>
+      <li><strong>Akhisar 05.05 — single-day yetersizliği:</strong> Tek günde ürün spesi + ambalaj + irsaliye/fatura + ilk sipariş netleşmeyebilir. Akhisar gündem dosyası net olsun (Cmt 03.05'te), öncelik sırası belli olsun (önce ürün spesi + irsaliye/fatura → sonra ambalaj → sonra sipariş ritmi). Tek günde olmazsa ikinci ziyaret 12-13.05 arası kondurulabilir.</li>
+      <li><strong>Arşivlenen projelerin sessiz kaybı:</strong> Bergama dahil 6 yan projede ivme dondu. 2 hafta sonra (12 Mayıs civarı) FarmNara ilerleme yeterliyse ve süre kalırsa Bergama hukuk yorumu reaktif olarak değerlendirilebilir (TFF mevzuat v1.0 hazır). Diğerleri için statü check zamanı: Haziran başı.</li>
     </ul>
   </div>
 </div>
